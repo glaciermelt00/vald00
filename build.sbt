@@ -35,8 +35,9 @@ libraryDependencies ++= Seq(
   "net.ixias" %% "ixias-aws"  % "1.1.40",
 
   // --[ OSS ]----------------------------------------------
-  "mysql"                % "mysql-connector-java"     % "8.0.28",
-  "net.logstash.logback" % "logstash-logback-encoder" % "7.0.1",
+  "mysql"                         % "mysql-connector-java"     % "8.0.28",
+  "net.logstash.logback"          % "logstash-logback-encoder" % "6.6",
+  "com.fasterxml.jackson.module" %% "jackson-module-scala"     % "2.12.1",
 
   // --[ UnitTest ]-----------------------------------------
   "org.specs2" %% "specs2-core"          % "4.14.0" % Test,
