@@ -22,7 +22,7 @@ package object persistence {
   object onMySQL {
     implicit val driver = slick.jdbc.MySQLProfile
 
-    object Productrepository extends persistence.ProductRepository
+    object ProductRepository extends persistence.ProductRepository
     object CartRepository    extends persistence.CartRepository
 
     def CartItemRepository = persistence.CartItemRepository(_: Cart.Id)
