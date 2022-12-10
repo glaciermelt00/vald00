@@ -5,5 +5,5 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.7.5")
+addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.8.13")
 addSbtPlugin("com.scalapenos"    % "sbt-prompt" % "1.0.2")
