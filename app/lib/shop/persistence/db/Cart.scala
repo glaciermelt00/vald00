@@ -35,12 +35,12 @@ case class CartTable[P <: JdbcProfile]()(implicit val driver: P)
     import Cart._
 
     // Columns
-    /* @1 */ def id        = column[Id]            ("id",           O.UInt64, O.PrimaryKey, O.AutoInc)
-    /* @2 */ def token     = column[Token]         ("token",        O.AsciiChar128)
-    /* @3 */ def state     = column[Status]        ("state",        O.Int8)
-    /* @4 */ def expiry    = column[LocalDateTime] ("expiry",       O.DateTime)
-    /* @5 */ def updatedAt = column[LocalDateTime] ("updated_at",   O.TsCurrent)
-    /* @6 */ def createdAt = column[LocalDateTime] ("created_at",   O.Ts)
+    /* @1 */ def id        = column[Id]            ("id",         O.UInt64, O.PrimaryKey, O.AutoInc)
+    /* @2 */ def token     = column[Token]         ("token",      O.AsciiChar128)
+    /* @3 */ def state     = column[Status]        ("state",      O.Int8)
+    /* @4 */ def expiry    = column[LocalDateTime] ("expiry",     O.DateTime)
+    /* @5 */ def updatedAt = column[LocalDateTime] ("updated_at", O.TsCurrent)
+    /* @6 */ def createdAt = column[LocalDateTime] ("created_at", O.Ts)
 
     /**
      * The bidirectional mappings.
