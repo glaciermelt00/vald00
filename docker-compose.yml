@@ -1,0 +1,13 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_USER: 'ixias'
+      MYSQL_PASSWORD: 'pass'
+      MYSQL_ROOT_PASSWORD: 'pass'
+    ports:
+      - 13306:3306
+    volumes:
+      - ./conf/database/mysql_data:/docker-entrypoint-initdb.d
+      - ./conf/database/my.cnf:/etc/mysql/conf.d/my.cnf
