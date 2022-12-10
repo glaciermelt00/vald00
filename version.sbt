@@ -5,4 +5,5 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-version in ThisBuild := "1.0.0-SNAPSHOT"
+ThisBuild / version       := "1.0.0-SNAPSHOT"
+ThisBuild / versionScheme := Some("early-semver")
