@@ -1,0 +1,14 @@
+@*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ *@
+
+@(vv: model.site.shop.SiteViewValueProductDetail)
+@views.html.common.layout.Default(vv.layout) {
+  <h2>Product Detail</h2>
+  <div class="product">
+    <h3 class="product__title">@vv.product.v.name</h3>
+  </div>
+}

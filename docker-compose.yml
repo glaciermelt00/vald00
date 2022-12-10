@@ -3,7 +3,7 @@ services:
   mysql:
     image: mysql:5.7
     environment:
-      MYSQL_USER: 'ixias'
+      MYSQL_USER: 'vald'
       MYSQL_PASSWORD: 'pass'
       MYSQL_ROOT_PASSWORD: 'pass'
     ports:
