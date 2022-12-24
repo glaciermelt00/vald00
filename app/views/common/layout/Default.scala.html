@@ -1,0 +1,24 @@
+@*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ *@
+
+@import play.twirl.api.Html
+@(vv: model.component.ViewValuePageLayout)(content: Html)
+<!DOCTYPE html>
+<html lang="ja">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma"          content="no-cache">
+    <meta http-equiv="Cache-Control"   content="no-cache">
+    <meta http-equiv="Expires"         content="Thu, 01 Dec 1994 16:00:00GMT">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type"    content="text/html;charset=UTF-8">
+    <link rel="stylesheet" media="screen" href="@{ controllers.routes.Assets.versioned("css/main.css") }">
+  </head>
+  <body>
+    <main>@content</main>
+  </body>
+</html>

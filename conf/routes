@@ -1,0 +1,11 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET  /              controllers.site.TopController.view
+GET  /product/:id   controllers.site.shop.ProductDetailController.view(id: Long)
+
+# System
+GET  /ping          controllers.ApplicationController.ping
+GET  /assets/*file  controllers.Assets.versioned(path="/public", file)
+GET  /*path         controllers.ApplicationController.redirect(to = "/", path)

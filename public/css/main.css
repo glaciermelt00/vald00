@@ -1,0 +1,22 @@
+/*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+html {
+  background: #F0F0F0;
+}
+body {
+  width:      375px;
+  height:     100vh;
+  margin:     0 auto;
+  padding:    0;
+  background: white;
+}
+
+h1,h2,h3,h4,h5 {
+  margin:  0;
+  padding: 0;
+}
