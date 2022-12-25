@@ -18,7 +18,6 @@ import User._
 case class User(
   id:        Option[Id]    = None,              // Id
   no:        Int,                               // No of user
-  aid:       Answer.Id,                         // Id of answer
   state:     Status        = Status.IS_ACTIVE,  // State of user
   updatedAt: LocalDateTime = NOW,               // DateTime of updated
   createdAt: LocalDateTime = NOW                // DateTime of created
@@ -32,12 +31,6 @@ object User {
   // --[ New Types ]------------------------------------------------------------
   val  Id = the[Identity[Id]]
   type Id = Long @@ User
-
-  // --[ Methods ]--------------------------------------------------------------
-  /**
-   * Create a new model object
-   */
-  def build: User#WithNoId = User().toWithNoId
 
   // --[ Enum: Activation status ]----------------------------------------------
   sealed abstract class Status(val code: Short) extends EnumStatus
