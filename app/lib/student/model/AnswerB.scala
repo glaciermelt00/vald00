@@ -15,7 +15,7 @@ import lib.udb.model.User
  * Answer data of problem B
  */
 import AnswerB._
-case class AnswerA(
+case class AnswerB(
   id:          Option[Id]    = None,  // Id
   uid:         User.Id,               // Id of user
   readScore:   Option[Int]   = None,  // Score of reading
