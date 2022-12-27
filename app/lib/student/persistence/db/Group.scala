@@ -5,20 +5,20 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-package lib.udb.persistence.db
+package lib.student.persistence.db
 
 
 import slick.jdbc.JdbcProfile
 import ixias.persistence.model.Table
 
 import java.time.LocalDateTime
-import lib.udb.model.User
+import lib.student.model.Group
 
 /**
  * Table Definition
  */
-case class UserTable[P <: JdbcProfile]()(implicit val driver: P)
-    extends Table[User, P] with SlickColumnTypes[P] {
+case class GroupTable[P <: JdbcProfile]()(implicit val driver: P)
+    extends Table[Group, P] with SlickColumnTypes[P] {
   import api._
 
   // --[ DSN ] -----------------------------------------------------------------
@@ -32,13 +32,13 @@ case class UserTable[P <: JdbcProfile]()(implicit val driver: P)
   class Query extends BasicQuery(new Table(_))
 
   // --[ Table ] ---------------------------------------------------------------
-  class Table(tag: Tag) extends BasicTable(tag, "user") {
-    import User._
+  class Table(tag: Tag) extends BasicTable(tag, "group") {
+    import Group._
 
     // Columns
     /* @1  */ def id            = column[Id]                  ("id",              O.UInt64, O.PrimaryKey, O.AutoInc)
-    /* @2  */ def no            = column[Int]                 ("no",              O.Int32)
-    /* @3  */ def state         = column[Status]              ("state",           O.Int16)
+    /* @2  */ def grade         = column[Grade]               ("grade",           O.Int16)
+    /* @3  */ def clas          = column[Int]                 ("clas",            O.Int32)
     /* @4  */ def updatedAt     = column[LocalDateTime]       ("updated_at",      O.TsCurrent)
     /* @5  */ def createdAt     = column[LocalDateTime]       ("created_at",      O.Ts)
 
@@ -48,10 +48,10 @@ case class UserTable[P <: JdbcProfile]()(implicit val driver: P)
      * 2) Model        => Tuple(table)
      */
     def * = (
-      id.?, no, state, updatedAt, createdAt
+      id.?, grade, clas, updatedAt, createdAt
     ) <> (
-      (User.apply   _).tupled,
-      (User.unapply _).andThen(_.map(_.copy(
+      (Group.apply   _).tupled,
+      (Group.unapply _).andThen(_.map(_.copy(
         _4 = LocalDateTime.now
       )))
     )
