@@ -18,10 +18,14 @@ trait SlickResourceProvider[P <: JdbcProfile] extends SlickColumnTypes[P] {
   implicit val driver: P
 
   // --[ Table ] ---------------------------------------------------------------
-  object GroupTable extends GroupTable
+  object GroupTable   extends GroupTable
+  object AnswerATable extends AnswerATable
+  object AnswerBTable extends AnswerBTable
 
   // --[ All Tables ] ----------------------------------------------------------
   lazy val AllTables = Seq(
-    GroupTable
+    GroupTable,
+    AnswerATable,
+    AnswerBTable
   )
 }
