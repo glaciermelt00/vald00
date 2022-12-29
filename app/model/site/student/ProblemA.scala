@@ -26,5 +26,8 @@ object SiteViewValueProblemA {
    * Create a view model object.
    */
   def build()(implicit request: RequestHeader): SiteViewValueProblemA =
-    SiteViewValueProblemA(ViewValuePageLayout.build)
+    SiteViewValueProblemA(
+      layout = ViewValuePageLayout.build
+                 .addRemoteAsset(_ => "problem-a")
+    )
 }

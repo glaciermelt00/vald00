@@ -43,8 +43,8 @@ function getPlugin(mode) {
 
 function getEntries() {
   return {
-    'common':   [ './scss/10-common/index.scss'   ],
-//    'top':      [ './scss/11-top/index.scss'      ],
+    'common':    [ './scss/10-common/index.scss'      ],
+    'problem-a': [ './scss/13-problem-a/index.scss'   ],
   };
 }
 
