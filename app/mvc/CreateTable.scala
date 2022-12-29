@@ -25,14 +25,18 @@ object CreateTable extends {
     implicit lazy val driver = self.driver
   }
 
-  object shop extends lib.shop.persistence.db.SlickResourceProvider[MySQLProfile] with DriverProvider
+//  object shop extends lib.shop.persistence.db.SlickResourceProvider[MySQLProfile] with DriverProvider
+  object student extends lib.student.persistence.db.SlickResourceProvider[MySQLProfile] with DriverProvider
+  object udb     extends lib.udb.persistence.db.SlickResourceProvider[MySQLProfile]     with DriverProvider
 
   /**
    * Execute process
    */
   def main(args: Array[String]): Unit = {
     val f = for {
-      _ <- Future.traverse(shop.AllTables)(createTable(_) recover { case _: Throwable => true })
+//      _ <- Future.traverse(shop.AllTables)(createTable(_) recover { case _: Throwable => true })
+      _ <- Future.traverse(student.AllTables) (createTable(_) recover { case _: Throwable => true })
+      _ <- Future.traverse(udb.AllTables)     (createTable(_) recover { case _: Throwable => true })
     } yield ()
     Await.result(f, Duration.Inf)
   }

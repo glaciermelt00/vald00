@@ -1,0 +1,18 @@
+/*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+@use 'sass:map';
+@use 'theming' as main;
+
+#site-problem-a {
+
+  .inner {
+    display:         flex;
+    justify-content: center;
+    font-size:       main.$space-size-large;
+  }
+}

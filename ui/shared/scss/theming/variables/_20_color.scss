@@ -1,0 +1,26 @@
+//------------------------------------------------------------------------------
+// Copyright Jo Harada. All Rights Reserved.
+//
+// For the full copyright and license information,
+// please view the LICENSE file that was distributed with this source code.
+//------------------------------------------------------------------------------
+
+@use './21_palette' as palette;
+
+//- Text color alias
+$text-color:     palette.$dark-primary-text;
+$text-secondary: palette.$dark-secondary-text;
+$text-disabled:  palette.$dark-disabled-text;
+
+//- Brand Color
+$main-palette:   palette.$teal-palette;
+$sub-palette:    palette.$orange-palette;
+$warn-palette:   palette.$red-palette;
+
+//- Back ground color
+$back-ground-gray:        #F1EDEE;
+$back-ground-crevice:     #F5F2F3;
+
+//- Border color
+$border-pagination:       #DEE2E6;
+$border-review:           rgba(16,7,10,0.12);

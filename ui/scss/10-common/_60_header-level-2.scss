@@ -1,0 +1,17 @@
+/*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+@use 'theming' as main;
+
+//- Header title: H2
+//---------------------------
+.common-header.level-2 {
+  .common-header__text {
+    font-size:   main.$font-size-base;
+    font-weight: main.$font-weight-bold;
+  }
+}

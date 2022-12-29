@@ -1,0 +1,25 @@
+/*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+@use 'theming' as main;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap');
+
+body {
+  min-width:  main.$desktop-content-width !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+body > main {
+  @include main.abs-position;
+  top:        main.$desktop-header-height !important;
+  min-width:  main.$desktop-content-width;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

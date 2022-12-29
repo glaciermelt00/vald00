@@ -1,0 +1,72 @@
+//------------------------------------------------------------------------------
+// Copyright Jo Harada. All Rights Reserved.
+//
+// For the full copyright and license information,
+// please view the LICENSE file that was distributed with this source code.
+//------------------------------------------------------------------------------
+
+@use 'sass:math';
+
+// Font size base
+$font-size-base-px:      16px !default;
+$icon-size-base-px:      38px !default;
+$icon-font-size-base-px: 24px !default;
+
+// Font weight
+$font-weight-light:      300;
+$font-weight-regular:    400;
+$font-weight-medium:     500;
+$font-weight-bold:       700;
+$font-weight-black:      900;
+
+// Font size
+$font-size-none:         0rem;
+$font-size-3xnano:       1.0rem * math.div(10px, $font-size-base-px);
+$font-size-2xnano:       1.0rem * math.div(11px, $font-size-base-px);
+$font-size-xnano:        1.0rem * math.div(12px, $font-size-base-px);
+$font-size-nano:         1.0rem * math.div(13px, $font-size-base-px);
+$font-size-micro:        1.0rem * math.div(14px, $font-size-base-px);
+$font-size-small:        1.0rem * math.div(15px, $font-size-base-px);
+$font-size-base:         1.0rem;
+$font-size-medium:       1.0rem * math.div(18px, $font-size-base-px);
+$font-size-large:        1.0rem * math.div(20px, $font-size-base-px);
+$font-size-xlarge:       1.0rem * math.div(22px, $font-size-base-px);
+$font-size-2xlarge:      1.0rem * math.div(24px, $font-size-base-px);
+$font-size-3xlarge:      1.0rem * math.div(26px, $font-size-base-px);
+$font-size-4xlarge:      1.0rem * math.div(36px, $font-size-base-px);
+$font-size-5xlarge:      1.0rem * math.div(40px, $font-size-base-px);
+$font-size-6xlarge:      1.0rem * math.div(42px, $font-size-base-px);
+$font-size-7xlarge:      1.0rem * math.div(46px, $font-size-base-px);
+
+// Line height rate
+$line-height-fit:        1.0;
+$line-height-nano:       1.2;
+$line-height-small:      1.3;
+$line-height-base:       1.5;
+$line-height-medium:     1.8;
+$line-height-large:      2.0;
+$line-height-xlarge:     2.1;
+$line-height-2xlarge:    2.2;
+$line-height-3xlarge:    2.3;
+$line-height-4xlarge:    2.4;
+
+// Letter spacing
+$letter-spacing-small:   .03rem;
+$letter-spacing-base:    .05rem;
+$letter-spacing-medium:  .1rem;
+$letter-spacing-large:   .15rem;
+
+$letter-spacing-small-px:    0.5px;
+$letter-spacing-base-px:     0.6px;
+$letter-spacing-medium-px:   0.7px;
+$letter-spacing-large-px:    1.2px;
+$letter-spacing-xlarge-px:   1.5px;
+
+// Font: Normal
+$font-family:
+  'Roboto',
+  'Noto Sans JP',
+  sans-serif;
+
+// Font: for number
+$font-family-number: 'Roboto', serif;

@@ -1,0 +1,29 @@
+@*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ *@
+
+@import play.twirl.api.Html
+@(
+  sectionId:           String,              // Definition of CSS: id
+  sectionClass:        String = "",         // Definition of CSS: class
+  sectionTitle:        String = "",         // Title: Text
+  sectionTitleContent: Option[Html] = None  // Title: HTML
+)(content: Html)
+
+<section
+  id    = @sectionId
+  class = "main-content__section section @if(sectionClass.length > 0) { @sectionClass }"
+>
+  @if(sectionTitle.length > 0) {
+    @sectionTitle
+  }
+  @for(title <- sectionTitleContent) {
+    @sectionTitleContent
+  }
+  <div class="section__content">
+    @content
+  </div>
+</section>
