@@ -5,20 +5,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-package lib.udb.persistence.db
+package lib.student.persistence.db
 
 
 import slick.jdbc.JdbcProfile
 import ixias.persistence.model.Table
 
 import java.time.LocalDateTime
+import lib.student.model.AnswerA
 import lib.udb.model.User
 
 /**
  * Table Definition
  */
-case class UserTable[P <: JdbcProfile]()(implicit val driver: P)
-    extends Table[User, P] with SlickColumnTypes[P] {
+case class AnswerATable[P <: JdbcProfile]()(implicit val driver: P)
+    extends Table[AnswerA, P] with SlickColumnTypes[P] {
   import api._
 
   // --[ DSN ] -----------------------------------------------------------------
@@ -32,15 +33,18 @@ case class UserTable[P <: JdbcProfile]()(implicit val driver: P)
   class Query extends BasicQuery(new Table(_))
 
   // --[ Table ] ---------------------------------------------------------------
-  class Table(tag: Tag) extends BasicTable(tag, "user") {
-    import User._
+  class Table(tag: Tag) extends BasicTable(tag, "answer_a") {
+    import AnswerA._
 
     // Columns
     /* @1  */ def id            = column[Id]                  ("id",              O.UInt64, O.PrimaryKey, O.AutoInc)
-    /* @2  */ def no            = column[Int]                 ("no",              O.Int32)
-    /* @3  */ def state         = column[Status]              ("state",           O.Int16)
-    /* @4  */ def updatedAt     = column[LocalDateTime]       ("updated_at",      O.TsCurrent)
-    /* @5  */ def createdAt     = column[LocalDateTime]       ("created_at",      O.Ts)
+    /* @2  */ def uid           = column[User.Id]             ("uid",             O.Int64)
+    /* @3  */ def readScore     = column[Int]                 ("read_score",      O.Int32)
+    /* @4  */ def speedSilent   = column[Int]                 ("speed_silent",    O.Int32)
+    /* @5  */ def speedReply    = column[Int]                 ("speed_reply",     O.Int32)
+    /* @6  */ def speedOral     = column[Int]                 ("speed_oral",      O.Int32)
+    /* @7  */ def updatedAt     = column[LocalDateTime]       ("updated_at",      O.TsCurrent)
+    /* @8  */ def createdAt     = column[LocalDateTime]       ("created_at",      O.Ts)
 
     /**
      * The bidirectional mappings.
@@ -48,11 +52,11 @@ case class UserTable[P <: JdbcProfile]()(implicit val driver: P)
      * 2) Model        => Tuple(table)
      */
     def * = (
-      id.?, no, state, updatedAt, createdAt
+      id.?, uid, readScore.?, speedSilent.?, speedReply.?, speedOral.?, updatedAt, createdAt
     ) <> (
-      (User.apply   _).tupled,
-      (User.unapply _).andThen(_.map(_.copy(
-        _4 = LocalDateTime.now
+      (AnswerA.apply   _).tupled,
+      (AnswerA.unapply _).andThen(_.map(_.copy(
+        _7 = LocalDateTime.now
       )))
     )
   }
