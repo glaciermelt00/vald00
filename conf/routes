@@ -3,10 +3,9 @@
 # ~~~~
 
 GET  /              controllers.site.TopController.view
-GET  /product/:id   controllers.site.shop.ProductDetailController.view(id: Long)
+GET  /problem/a     controllers.site.student.ProblemController.viewProblemA
 
 # System
 GET  /ping          controllers.ApplicationController.ping
-#GET  /assets/*file  controllers.Assets.versioned(path="/public", file)
 GET  /assets/*file  ixias.play.api.controllers.UIAssets.versioned(path = "/public", file)
 GET  /*path         controllers.ApplicationController.redirect(to = "/", path)

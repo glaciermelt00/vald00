@@ -5,7 +5,7 @@
  * please view the LICENSE file that was distributed with this source code.
  *@
 
-@(vv: model.site.SiteViewValueTop)
+@(vv: model.site.SiteViewValueProblemA)
 @views.html.common.layout.Default(vv.layout) {
   @views.html.common.layout.ContentLayout(
     id      = "content",
@@ -13,6 +13,5 @@
   )
 }
 @tplContent = {
-  <h2>Top Page</h2>
-  <span>it's demo text.</span>
+  @views.html.site.student.problem.a._01_ProblemA()
 }

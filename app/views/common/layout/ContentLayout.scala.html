@@ -1,0 +1,47 @@
+@*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ *@
+
+@import play.twirl.api.Html
+@(
+  id:         String,               // id for article tag
+  content:    Html,                 // Content
+  headerOpt:  Option[Html] = None,  // Content: Header
+  northOpt:   Option[Html] = None,  // Content: Header above aside
+  asideOpt:   Option[Html] = None,  // Content: Side menu
+  footerOpt:  Option[Html] = None   // Content: Footer
+)
+
+@** Content: Header *@
+@for(header <- headerOpt) {
+  <header id="main-content__header">@header</header>
+}
+
+@** Content: Article *@
+<article id="@id">
+  @asideOpt match {
+    case None => {
+      @for(north <- northOpt) {
+        <div id="main-content__north">@north</div>
+      }
+      <div id="main-content__content">@content</div>
+    }
+    case Some(aside) => {
+      <div id="main-content__layout" class="layout">
+        @for(north <- northOpt) {
+          <div id="main-content__north" class="layout__section">@north</div>
+        }
+        <aside id="main-content__nav-side" class="layout__section nav-side">@aside</aside>
+        <div   id="main-content__content"  class="layout__section content">@content</div>
+      </div>
+    }
+  }
+</article>
+
+@** Content: Footer *@
+@for(footer <- footerOpt) {
+  <footer id="main-content__footer">@footer</footer>
+}
