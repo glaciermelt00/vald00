@@ -1,0 +1,26 @@
+//------------------------------------------------------------------------------
+// Copyright Jo Harada. All Rights Reserved.
+//
+// For the full copyright and license information,
+// please view the LICENSE file that was distributed with this source code.
+//------------------------------------------------------------------------------
+
+// For Mixin Configuration
+$mixin-image-path-prefix: "/assets/images/" !default;
+
+//- Base setting
+@forward './10_common';
+@forward './11_fonts';
+@forward './20_color';
+
+//- Brand color palette
+@forward './20_color';
+@forward './21_palette';
+// @forward './21_color-main';
+// @forward './22_color-sub';
+// @forward './23_color-warn';
+// @forward './24_color-grey';
+
+//- Mixins
+@import "_90_mixin";
+@import "_90_mixin_vendor";

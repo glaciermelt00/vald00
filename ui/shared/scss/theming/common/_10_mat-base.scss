@@ -1,0 +1,45 @@
+//------------------------------------------------------------------------------
+// Copyright Jo Harada. All Rights Reserved.
+//
+// For the full copyright and license information,
+// please view the LICENSE file that was distributed with this source code.
+//------------------------------------------------------------------------------
+
+@use '~@angular/material' as mat;
+@use 'theming' as main;
+
+$base-typography:  mat.define-typography-config(
+  $font-family:   main.$font-family,
+  $display-4:     mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $display-3:     mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $display-2:     mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $display-1:     mat.define-typography-level(34px, 40px, 400),
+  $headline:      mat.define-typography-level(24px, 32px, 400),
+  $title:         mat.define-typography-level(18px, 28px, 500, $letter-spacing: 0.04em),
+  $subheading-2:  mat.define-typography-level(16px, 28px, 400),
+  $subheading-1:  mat.define-typography-level(15px, 24px, 400),
+  $body-2:        mat.define-typography-level(14px, 24px, 500),
+  $body-1:        mat.define-typography-level(14px, 20px, 400),
+  $caption:       mat.define-typography-level(12px, 20px, 400),
+  $button:        mat.define-typography-level(14px, 14px, 500),
+  // Line-height must be unit-less fraction of the font-size.
+  $input:         mat.define-typography-level(14px, 1.5, 400)
+);
+
+@include mat.core($base-typography);
+@include mat.strong-focus-indicators();
+@include mat.all-component-themes(main.$theme);
+@include mat.strong-focus-indicators-theme(main.$theme);
+
+.mat-focus-indicator::before {
+  border-color: transparent !important;
+}
+
+.mat-bottom-sheet-container.background-grey {
+  background: map-get(main.$grey-palette, 50);
+}
+.mat-bottom-sheet-container-large {
+  width:      960px;
+  max-width:  960px;
+  max-height: 96vh !important;
+}

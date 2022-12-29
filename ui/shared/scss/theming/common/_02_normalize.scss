@@ -1,0 +1,56 @@
+//------------------------------------------------------------------------------
+// Copyright Jo Harada. All Rights Reserved.
+//
+// For the full copyright and license information,
+// please view the LICENSE file that was distributed with this source code.
+//------------------------------------------------------------------------------
+
+@use 'sass:map';
+@use 'theming' as base;
+
+html {
+  font-size:    base.$font-size-base-px;
+  font-family:  base.$font-family;
+  line-height:  base.$line-height-base;
+  touch-action: manipulation;
+  -webkit-text-size-adjust: none;
+}
+
+body {
+  color:          map.get(base.$grey-palette, 800);
+  font-size:      base.$font-size-base;
+  line-height:    base.$line-height-base;
+  background:     white;
+  letter-spacing: initial;
+  -webkit-overflow-scrolling: touch;
+}
+
+a, button {
+  cursor:  pointer;
+  outline: none;
+}
+
+img {
+  outline:         none;
+  image-rendering: auto;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.align-center {
+  text-align: center;
+}
+
+// Link
+a, .textlink {
+  cursor:      pointer;
+  outline:     none;
+  color:       inherit;
+  font-weight: inherit;
+  text-decoration: none !important;
+  &:hover {
+    text-decoration: underline;
+  }
+}

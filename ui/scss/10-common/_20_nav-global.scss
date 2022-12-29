@@ -1,0 +1,40 @@
+/*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+
+@use 'theming' as main;
+
+#nav-global.content {
+  top:        0;
+  left:       0;
+  right:      0;
+  height:     main.$desktop-header-height;
+  min-width:  main.$desktop-content-width;
+  position:   absolute;
+  background: white;
+  z-index:    900;
+  .inner {
+    height:          100%;
+    padding:         0 main.$space-size-large;
+    display:         flex;
+    align-items:     center;
+    justify-content: space-between;
+  }
+  .content__section.menu {
+    .menu__inner {
+      display: flex;
+    }
+    .menu__item:not(:last-child) {
+      margin-right: main.$space-size-medium;
+    }
+    .menu__item-text {
+      line-height: main.$line-height-base;
+      font-size:   main.$font-size-base;
+      font-weight: main.$font-weight-bold;
+    }
+  }
+}

@@ -1,0 +1,91 @@
+//------------------------------------------------------------------------------
+// Copyright Jo Harada. All Rights Reserved.
+//
+// For the full copyright and license information,
+// please view the LICENSE file that was distributed with this source code.
+//------------------------------------------------------------------------------
+
+//- Set absolete position
+@mixin abs-position($top: 0, $right: 0, $bottom: 0, $left: 0) {
+  @if $top    != null { top:    $top;    }
+  @if $right  != null { right:  $right;  }
+  @if $bottom != null { bottom: $bottom; }
+  @if $left   != null { left:   $left;   }
+  display:  block;
+  position: absolute;
+}
+
+@mixin abs-position-with-translate($top: 50%, $right: 50%) {
+  top:       $top;
+  left:      $right;
+  display:   block;
+  position:  absolute;
+  transform: translate($top * -1, $right * -1);
+}
+
+//- Mat-Label
+@mixin mat-label-default($width: $mat-label-width) {
+  width:       $width                        !important;
+  color:       map-get($mat-brand-dark, 700) !important;
+  font-weight: $font-weight-medium;
+}
+
+//- Mat-Icon: Set mat-icon size
+@mixin mat-icon-size($icon-size, $icon-font-size) {
+  width:       $icon-size !important;
+  height:      $icon-size !important;
+  line-height: $icon-size !important;
+  &::before {
+    width:       $icon-size;
+    height:      $icon-size;
+    line-height: $icon-size;
+    font-size:   $icon-font-size;
+  }
+}
+
+//- Resolve image-path
+//- NOTE: mixin-image-path-prefix must be set.
+@function assets-url($path) {
+  $image-url: $mixin-image-path-prefix + $path;
+  @return url("#{$image-url}");
+}
+
+//- Set background image
+//- NOTE: Do not use in css definition in shadow DOM.
+@mixin background-image($path, $maxSize: 2) {
+  $image-url:     assets-url($path);
+  $image-ext-pos: str-index($image-url, '.');
+  @if $image-ext-pos != null {
+    $image-set: $image-url + " 1x";
+    @if $maxSize > 2 {
+      @for $size from 2 through $maxSize {
+        $image-url-li: str-insert($image-url, "@#{$size}x", $image-ext-pos) + " #{$size}x";
+        $image-set:    append($image-set, $image-url-li, $separator: comma);
+      }
+    }
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center;
+    background-image:    $image-url;
+    background-image:    -webkit-image-set($image-set);
+  }
+}
+
+//- Ellipsis
+@mixin text-ellipsis() {
+  white-space:   nowrap;
+  text-overflow: ellipsis;
+  overflow:      hidden;
+}
+
+//- Show arrow icon
+//- NOTE: Use for before or after pseudo-elements
+@mixin arrow-icon($arrow-size, $arrow-color, $degrees, $border-weight: 2px) {
+  @include rotate($degrees);
+  content:        "";
+  display:        inline-block;
+  width:          $arrow-size;
+  height:         $arrow-size;
+  border-top:     $border-weight solid $arrow-color;
+  border-right:   $border-weight solid $arrow-color;
+}

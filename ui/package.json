@@ -1,0 +1,38 @@
+{
+  "name": "vald",
+  "version": "1.0.0-SNAPSHOT.0",
+  "scripts": {
+    "build": "NODE_ENV=development webpack --mode development         --progress --colors",
+    "build.watch": "NODE_ENV=development webpack --mode development --watch --progress --colors",
+    "build.prod": "NODE_ENV=production  webpack --mode production  -p      --progress --colors"
+  },
+  "devDependencies": {
+    "cross-env": "6.0.3",
+    "css-loader": "0.28.11",
+    "extract-text-webpack-plugin": "4.0.0-beta.0",
+    "file-loader": "1.1.11",
+    "font-awesome": "4.7.0",
+    "fs": "0.0.2",
+    "glob": "7.1.6",
+    "jquery": "3.4.1",
+    "jquery-validation": "1.19.1",
+    "jquery.loadtemplate": "1.5.10",
+    "moment": "2.24.0",
+    "sass": "1.39.2",
+    "optimize-css-assets-webpack-plugin": "4.0.3",
+    "postcss-loader": "2.1.5",
+    "purgecss-webpack-plugin": "2.1.0",
+    "sass-loader": "7.3.1",
+    "script-loader": "0.7.2",
+    "slick-carousel": "1.8.1",
+    "style-loader": "0.21.0",
+    "ts-loader": "4.5.0",
+    "ts-node": "5.0.1",
+    "tsconfig-paths-webpack-plugin": "3.2.0",
+    "typescript": "3.5.3",
+    "uglifyjs-webpack-plugin": "1.2.7",
+    "webpack": "4.42.1",
+    "webpack-cli": "3.3.11",
+    "webpack-manifest-plugin": "2.2.0"
+  }
+}

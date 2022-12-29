@@ -1,0 +1,33 @@
+/*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+@use 'sass:map';
+@use 'theming' as base;
+
+//- Custom component: Link Button
+//---------------------------------
+$common-link-button-height: 39px;
+
+.common-link-button {
+  display:       inline-block;
+  border:        base.$border-weight-base solid map.get(base.$teal-palette, 500);
+  border-radius: base.$border-radius-base;
+  background:    map.get(base.$gray-palette, A100);
+
+  .common-link-button__inner {
+    padding:     0 base.$space-size-base;
+    height:      $common-link-button-height;
+    line-height: $common-link-button-height;
+  }
+
+  .common-link-button__title {
+    line-height: $common-link-button-height;
+    color:       map.get(base.$teal-palette, 500);
+    font-size:   base.$font-size-small;
+    font-weight: base.$font-weight-bold;
+  }
+}

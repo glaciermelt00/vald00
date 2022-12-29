@@ -1,0 +1,19 @@
+/*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+@use 'sass:map';
+@use 'theming' as base;
+
+//- Custom component: Link Button Primary
+//-----------------------------------------
+.common-link-button.button-primary {
+  background: map.get(base.$teal-palette, 500);
+
+  .common-link-button__title {
+    color: map.get(base.$gray-palette, A100);
+  }
+}
