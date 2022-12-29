@@ -30,9 +30,9 @@ resolvers ++= Seq(
 libraryDependencies ++= Seq(
 
   // --[ Private ]------------------------------------------
-  "net.ixias" %% "ixias"      % "1.1.40",
-  "net.ixias" %% "ixias-play" % "1.1.40",
-  "net.ixias" %% "ixias-aws"  % "1.1.40",
+  "net.ixias" %% "ixias"      % "1.1.43",
+  "net.ixias" %% "ixias-play" % "1.1.43",
+  "net.ixias" %% "ixias-aws"  % "1.1.43",
   "com.googlecode.libphonenumber" % "libphonenumber" % "7.4.5",
 
   // --[ OSS ]----------------------------------------------
