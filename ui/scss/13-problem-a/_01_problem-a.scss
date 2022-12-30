@@ -10,9 +10,41 @@
 
 #site-problem-a {
 
-  .inner {
+  .inner__head {
     display:         flex;
     justify-content: center;
     font-size:       main.$space-size-large;
+  }
+  .inner__content {
+    height:          500px;
+    display:         flex;
+    justify-content: flex-end;
+
+    .content__wrapper {
+      display:        flex;
+      gap:            main.$space-size-large;
+      flex-direction: column;
+      @include main.writing-mode(vertical-rl);
+    }
+    .reading__complete {
+      width:       main.$space-size-xlarge;
+      font-size:   main.$font-size-base;
+      line-height: main.$font-size-base;
+    }
+    .after__reading {
+      display:        flex;
+      gap:            main.$space-size-large;
+      flex-direction: column;
+    }
+    .question__options {
+      margin:  main.$space-size-large main.$space-size-base 0 0;
+      display: flex;
+      gap:     main.$space-size-base;
+    }
+    .answer__complete {
+      width:       main.$space-size-xlarge;
+      font-size:   main.$font-size-base;
+      line-height: main.$font-size-base;
+    }
   }
 }

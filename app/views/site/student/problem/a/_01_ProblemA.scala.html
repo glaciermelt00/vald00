@@ -12,10 +12,56 @@
 @views.html.common.layout.Section(
   sectionId = "site-problem-a"
 ) {
-  <div class="inner">
-    <h2>Title</h2>
+  <div class="inner__head">
+    <h2>読解テスト - A 問題</h2>
   </div>
-  <div>
-    <div>content</div>
+  <div class="inner__content">
+    <div class="content__wrapper">
+
+      @* Direction *@
+      <div class="direction">
+        <span>次の文を読んで、あとの問いに答えなさい。</span>
+      </div>
+
+      @* Statement *@
+      <div class="statement">
+        <span>私の家族を紹介します。私は、中学二年生です。父は会社に勤務しています。祖父母と母の仕事はいちご栽培です。双子の兄は大学生で、東京に住んでいます。高校生の姉は地元の学校です。妹は私の二歳下です。弟は幼稚園生です。夕食は帰宅時間の遅い父を除いてみんなで食べます。</span>
+      </div>
+
+      @* Reading complete *@
+      @* TODO: make tempelate *@
+      <button class="reading__complete">
+        設問を表示する
+      </button>
+
+      @* Questions area *@
+      @* TODO: make tempelate *@
+      <div class="after__reading">
+
+        @* Questions *@
+        <div class="questions">
+
+          @* Question 1 *@
+          @* TODO: make template *@
+          <div class="question__item">
+            <div class="question__title">
+              <span>問一　子どもは全部で何人ですか。</span>
+            </div>
+            <div class="question__options">
+              <input type="radio">四人
+              <input type="radio">五人
+              <input type="radio">六人
+            </div>
+          </div>
+        </div>
+
+        @* Answer complete *@
+        @* TODO: make tempelate *@
+        <button class="answer__complete">
+          回答する
+        </button>
+      </div>
+
+    </div>
   </div>
 }

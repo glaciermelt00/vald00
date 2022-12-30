@@ -212,3 +212,10 @@
       -ms-user-select: $select; // IE10+
           user-select: $select;
 }
+
+// Vertical writing
+@mixin writing-mode($writing-mode) {
+  -webkit-writing-mode: $writing-mode;
+      -ms-writing-mode: $writing-mode;
+          writing-mode: $writing-mode;
+}
