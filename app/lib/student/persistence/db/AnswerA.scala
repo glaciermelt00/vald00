@@ -12,14 +12,14 @@ import slick.jdbc.JdbcProfile
 import ixias.persistence.model.Table
 
 import java.time.LocalDateTime
-import lib.student.model.AnswerA
+import lib.student.model.Answer
 import lib.udb.model.User
 
 /**
  * Table Definition
  */
 case class AnswerATable[P <: JdbcProfile]()(implicit val driver: P)
-    extends Table[AnswerA, P] with SlickColumnTypes[P] {
+    extends Table[Answer, P] with SlickColumnTypes[P] {
   import api._
 
   // --[ DSN ] -----------------------------------------------------------------
@@ -34,7 +34,7 @@ case class AnswerATable[P <: JdbcProfile]()(implicit val driver: P)
 
   // --[ Table ] ---------------------------------------------------------------
   class Table(tag: Tag) extends BasicTable(tag, "answer_a") {
-    import AnswerA._
+    import Answer._
 
     // Columns
     /* @1  */ def id            = column[Id]                  ("id",              O.UInt64, O.PrimaryKey, O.AutoInc)
@@ -46,22 +46,21 @@ case class AnswerATable[P <: JdbcProfile]()(implicit val driver: P)
     /* @7  */ def updatedAt     = column[LocalDateTime]       ("updated_at",      O.TsCurrent)
     /* @8  */ def createdAt     = column[LocalDateTime]       ("created_at",      O.Ts)
 
+    val enum: ixias.util.EnumBitFlags.Of[Answer.ReadAnswer]
     /**
      * The bidirectional mappings.
      * 1) Tuple(table) => Model
      * 2) Model        => Tuple(table)
      */
-    val enum: ixias.util.EnumBitFlags.Of[AnswerA.ReadAnswer]
-
     def * = (
       id.?, uid, readAnswer, speedSilent.?, speedReply.?, speedOral.?, updatedAt, createdAt
     ) <> (
-      (AnswerA.apply   _).tupled.compose(
+      (Answer.apply   _).tupled.compose(
         t => t.copy(
           _3 = enum(t._3)
         )
       ),
-      (AnswerA.unapply _).andThen(_.map(
+      (Answer.unapply _).andThen(_.map(
         t => t.copy(
           _3 = enum.toBitset(t._3),
           _7 = LocalDateTime.now

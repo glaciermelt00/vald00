@@ -13,10 +13,10 @@ import java.time.LocalDateTime
 import lib.udb.model.User
 
 /**
- * Answer data of problem A
+ * Answer data of problem
  */
-import AnswerA._
-case class AnswerA(
+import Answer._
+case class Answer(
   id:          Option[Id]      = None,  // Id
   uid:         User.Id,               // Id of user
   readAnswer:  Seq[ReadAnswer] = Nil,   // Answer of reading
@@ -30,11 +30,11 @@ case class AnswerA(
 /**
  * Companion object
  */
-object AnswerA {
+object Answer {
 
   // --[ New Types ]------------------------------------------------------------
   val  Id = the[Identity[Id]]
-  type Id = Long @@ AnswerA
+  type Id = Long @@ Answer
 
   /**
    * ReadAnswer
