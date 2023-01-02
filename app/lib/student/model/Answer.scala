@@ -41,10 +41,10 @@ object Answer {
    */
   sealed abstract class ReadAnswer(val code: Long, val name: String) extends EnumBitFlags
   object ReadAnswer extends EnumBitFlags.Of[ReadAnswer] {
-    case object IS_CORRECT_ON_ONE    extends ReadAnswer(code = 1 << 0, name = "問一正解")
-    case object IS_CORRECT_ON_TWO    extends ReadAnswer(code = 1 << 1, name = "問二正解")
-    case object IS_CORRECT_ON_THREE  extends ReadAnswer(code = 1 << 2, name = "問三正解")
-    case object IS_CORRECT_ON_FOUR   extends ReadAnswer(code = 1 << 3, name = "問四正解")
-    case object IS_CORRECT_ON_FIVE   extends ReadAnswer(code = 1 << 4, name = "問五正解")
+    case object IS_CORRECT_ON_FIRST  extends ReadAnswer(code = 1 << 0, name = "問一正解")
+    case object IS_CORRECT_ON_SECOND extends ReadAnswer(code = 1 << 1, name = "問二正解")
+    case object IS_CORRECT_ON_THIRD  extends ReadAnswer(code = 1 << 2, name = "問三正解")
+    case object IS_CORRECT_ON_FOURTH extends ReadAnswer(code = 1 << 3, name = "問四正解")
+    case object IS_CORRECT_ON_FIFTH  extends ReadAnswer(code = 1 << 4, name = "問五正解")
   }
 }

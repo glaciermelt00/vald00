@@ -46,7 +46,6 @@ case class AnswerBTable[P <: JdbcProfile]()(implicit val driver: P)
     /* @7  */ def updatedAt     = column[LocalDateTime]       ("updated_at",      O.TsCurrent)
     /* @8  */ def createdAt     = column[LocalDateTime]       ("created_at",      O.Ts)
 
-    val enum: ixias.util.EnumBitFlags.Of[Answer.ReadAnswer]
     /**
      * The bidirectional mappings.
      * 1) Tuple(table) => Model
@@ -57,12 +56,12 @@ case class AnswerBTable[P <: JdbcProfile]()(implicit val driver: P)
     ) <> (
       (Answer.apply   _).tupled.compose(
         t => t.copy(
-          _3 = enum(t._3)
+          _3 = Answer.ReadAnswer.apply(t._3)
         )
       ),
       (Answer.unapply _).andThen(_.map(
         t => t.copy(
-          _3 = enum.toBitset(t._3),
+          _3 = Answer.ReadAnswer.toBitset(t._3),
           _7 = LocalDateTime.now
         )
       ))
