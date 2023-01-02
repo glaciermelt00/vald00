@@ -39,7 +39,7 @@ case class AnswerATable[P <: JdbcProfile]()(implicit val driver: P)
     // Columns
     /* @1  */ def id            = column[Id]                  ("id",              O.UInt64, O.PrimaryKey, O.AutoInc)
     /* @2  */ def uid           = column[User.Id]             ("uid",             O.Int64)
-    /* @3  */ def readScore     = column[Int]                 ("read_score",      O.Int32)
+    /* @3  */ def readAnswer    = column[Long]                ("read_answer",     O.Int64)
     /* @4  */ def speedSilent   = column[Int]                 ("speed_silent",    O.Int32)
     /* @5  */ def speedReply    = column[Int]                 ("speed_reply",     O.Int32)
     /* @6  */ def speedOral     = column[Int]                 ("speed_oral",      O.Int32)
@@ -51,13 +51,22 @@ case class AnswerATable[P <: JdbcProfile]()(implicit val driver: P)
      * 1) Tuple(table) => Model
      * 2) Model        => Tuple(table)
      */
+    val enum: ixias.util.EnumBitFlags.Of[AnswerA.ReadAnswer]
+
     def * = (
-      id.?, uid, readScore.?, speedSilent.?, speedReply.?, speedOral.?, updatedAt, createdAt
+      id.?, uid, readAnswer, speedSilent.?, speedReply.?, speedOral.?, updatedAt, createdAt
     ) <> (
-      (AnswerA.apply   _).tupled,
-      (AnswerA.unapply _).andThen(_.map(_.copy(
-        _7 = LocalDateTime.now
-      )))
+      (AnswerA.apply   _).tupled.compose(
+        t => t.copy(
+          _3 = enum(t._3)
+        )
+      ),
+      (AnswerA.unapply _).andThen(_.map(
+        t => t.copy(
+          _3 = enum.toBitset(t._3),
+          _7 = LocalDateTime.now
+        )
+      ))
     )
   }
 }

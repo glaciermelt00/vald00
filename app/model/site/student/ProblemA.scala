@@ -5,7 +5,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-package model.site
+package model.site.student
 
 import play.api.mvc.RequestHeader
 import model.component.ViewValuePageLayout
