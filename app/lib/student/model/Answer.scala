@@ -18,7 +18,7 @@ import lib.udb.model.User
 import Answer._
 case class Answer(
   id:          Option[Id]      = None,  // Id
-  uid:         User.Id,               // Id of user
+  uid:         User.Id,                 // Id of user
   readAnswer:  Seq[ReadAnswer] = Nil,   // Answer of reading
   speedSilent: Option[Int]     = None,  // Speed of silent reading
   speedReply:  Option[Int]     = None,  // Speed of reply

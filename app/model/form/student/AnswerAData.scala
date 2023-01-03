@@ -18,3 +18,18 @@ case class FormValueAnswerA(
   answer_fourth: Int,
   answer_fifth:  Int
 )
+
+/**
+ * Companion object
+ */
+object FormValueAnswerA {
+  val formMapping: Form[FormValueAnswerA] = Form(
+    mapping(
+      "answer_first"  -> number,
+      "answer_second" -> number,
+      "answer_third"  -> number,
+      "answer_fourth" -> number,
+      "answer_fifth"  -> number
+    )
+  )(FormValueAnswerA.apply)(FormValueAnswerA.unapply)
+}
