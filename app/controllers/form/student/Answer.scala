@@ -10,6 +10,8 @@ package controllers.form.student
 import play.api.mvc._
 import play.api.i18n.I18nSupport
 
+import model.form.student.FormValueAnswerA
+
 /**
  * Answer form
  */
@@ -21,8 +23,19 @@ class AnswerController @javax.inject.Inject()(implicit
    * Submit answer
    */
   def submitAnswer = Action { implicit request =>
-    Ok(views.html.site.student.problem.a.Main(
-      model.site.student.SiteViewValueProblemA.build
-    ))
+    FormValueAnswerA.formMapping.bindFromRequest.fold(
+      formWithErrors => {
+        BadRequest(views.html.site.student.problem.a.Main(
+          model.site.student.SiteViewValueProblemA.build,
+          formWithErrors
+        ))
+      },
+      answer => {
+        // TODO: redirect to problem b page
+        Ok(views.html.site.top.Main(
+          model.site.SiteViewValueTop.build
+        ))
+      }
+    )
   }
 }

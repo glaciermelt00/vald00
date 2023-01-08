@@ -8,7 +8,9 @@
 @**
  * Problem A page
  *@
-
+@import play.api.data._
+@import model.form.student.FormValueAnswerA
+@(form: Form[FormValueAnswerA])
 @views.html.common.layout.Section(
   sectionId = "site-problem-a"
 ) {
