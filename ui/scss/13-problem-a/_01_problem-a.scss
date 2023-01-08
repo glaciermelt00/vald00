@@ -30,11 +30,17 @@
       width:       main.$space-size-xlarge;
       font-size:   main.$font-size-base;
       line-height: main.$font-size-base;
+      &.display-none {
+        display: none;
+      }
     }
     .after__reading {
       display:        flex;
       gap:            main.$space-size-large;
       flex-direction: column;
+      &.display-none {
+        display: none;
+      }
     }
     .question__options {
       margin:  main.$space-size-large main.$space-size-base 0 0;

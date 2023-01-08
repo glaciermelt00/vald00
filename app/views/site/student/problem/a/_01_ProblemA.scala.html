@@ -30,13 +30,13 @@
 
       @* Reading complete *@
       @* TODO: make tempelate *@
-      <button class="reading__complete">
+      <button id="reading__complete" class="reading__complete" onclick="onClickToQuestions()">
         設問を表示する
       </button>
 
       @* Questions area *@
       @* TODO: make tempelate *@
-      <div class="after__reading">
+      <div id="after__reading" class="after__reading display-none">
 
         @* Questions *@
         <div class="questions">
@@ -64,4 +64,14 @@
 
     </div>
   </div>
+
+  <script>
+    function onClickToQuestions() {
+      const elemReadComp  = document.getElementById("reading__complete");
+      const elemAfterRead = document.getElementById("after__reading");
+
+      elemAfterRead.classList.remove("display-none");
+      elemReadComp.classList.add("display-none");
+    }
+  </script>
 }
