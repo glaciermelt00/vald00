@@ -7,6 +7,8 @@
 
 package model.form.student
 
+import play.api.data._
+import play.api.data.Forms._
 
 /**
  * Answer A Data
@@ -30,6 +32,6 @@ object FormValueAnswerA {
       "answer_third"  -> number,
       "answer_fourth" -> number,
       "answer_fifth"  -> number
-    )
-  )(FormValueAnswerA.apply)(FormValueAnswerA.unapply)
+    )(FormValueAnswerA.apply)(FormValueAnswerA.unapply)
+  )
 }
