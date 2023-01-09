@@ -14,32 +14,24 @@ import play.api.data.Forms._
  * Answer A Data
  */
 case class FormValueAnswerA(
-  answer_first:  Int,
-  answer_second: Int,
-  answer_third:  Int,
-  answer_fourth: Int,
-  answer_fifth:  Int
+  answer_first:  String,
+  answer_second: String,
+  answer_third:  String,
+  answer_fourth: String,
+  answer_fifth:  String
 )
 
 /**
  * Companion object
  */
 object FormValueAnswerA {
-  val formMapping: Seq[Tuple2[String, Mapping[Int]]] = Seq(
-    "answer_first"  -> number,
-    "answer_second" -> number,
-    "answer_third"  -> number,
-    "answer_fourth" -> number,
-    "answer_fifth"  -> number
-  )
-
   val form: Form[FormValueAnswerA] = Form(
     mapping(
-      formMapping(0),
-      formMapping(1),
-      formMapping(2),
-      formMapping(3),
-      formMapping(4)
+      "answer_first"  -> nonEmptyText,
+      "answer_second" -> nonEmptyText,
+      "answer_third"  -> nonEmptyText,
+      "answer_fourth" -> nonEmptyText,
+      "answer_fifth"  -> nonEmptyText
     )(FormValueAnswerA.apply)(FormValueAnswerA.unapply)
   )
 }
