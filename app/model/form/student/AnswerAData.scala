@@ -25,13 +25,21 @@ case class FormValueAnswerA(
  * Companion object
  */
 object FormValueAnswerA {
-  val formMapping: Form[FormValueAnswerA] = Form(
+  val formMapping: Seq[Tuple2[String, Mapping[Int]]] = Seq(
+    "answer_first"  -> number,
+    "answer_second" -> number,
+    "answer_third"  -> number,
+    "answer_fourth" -> number,
+    "answer_fifth"  -> number
+  )
+
+  val form: Form[FormValueAnswerA] = Form(
     mapping(
-      "answer_first"  -> number,
-      "answer_second" -> number,
-      "answer_third"  -> number,
-      "answer_fourth" -> number,
-      "answer_fifth"  -> number
+      formMapping(0),
+      formMapping(1),
+      formMapping(2),
+      formMapping(3),
+      formMapping(4)
     )(FormValueAnswerA.apply)(FormValueAnswerA.unapply)
   )
 }

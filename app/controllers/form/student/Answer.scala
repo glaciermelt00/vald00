@@ -23,7 +23,7 @@ class AnswerController @javax.inject.Inject()(implicit
    * Submit answer
    */
   def submitAnswer = Action { implicit request =>
-    FormValueAnswerA.formMapping.bindFromRequest.fold(
+    FormValueAnswerA.form.bindFromRequest.fold(
       formWithErrors => {
         BadRequest(views.html.site.student.problem.a.Main(
           model.site.student.SiteViewValueProblemA.build,

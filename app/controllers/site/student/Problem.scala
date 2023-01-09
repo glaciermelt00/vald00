@@ -23,7 +23,7 @@ class ProblemController @javax.inject.Inject()(implicit
   def viewProblemA = Action { implicit request =>
     Ok(views.html.site.student.problem.a.Main(
       model.site.student.SiteViewValueProblemA.build,
-      model.form.student.FormValueAnswerA.formMapping
+      model.form.student.FormValueAnswerA.form
     ))
   }
 }
