@@ -6,11 +6,13 @@
  *@
 
 @import play.api.data._
+@import play.api.i18n.MessagesProvider
 @import model.form.student.FormValueAnswerA
+
 @(
   vv:   model.site.student.SiteViewValueProblemA,
   form: Form[FormValueAnswerA]
-)
+)(implicit messagesProvider: MessagesProvider)
 @views.html.common.layout.Default(vv.layout) {
   @views.html.common.layout.ContentLayout(
     id      = "content",

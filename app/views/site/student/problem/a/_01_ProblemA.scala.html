@@ -10,10 +10,11 @@
  *@
 
 @import play.api.data._
+@import play.api.i18n.MessagesProvider
 @import views.html.helper
 @import model.form.student.FormValueAnswerA
 
-@(form: Form[FormValueAnswerA])
+@(form: Form[FormValueAnswerA])(implicit messagesProvider: MessagesProvider)
 @views.html.common.layout.Section(
   sectionId = "site-problem-a"
 ) {
@@ -44,25 +45,19 @@
       <div id="after__reading" class="after__reading display-none">
 
         @* Questions *@
-
-        @helper.form(action = controllers.form.student.routes.AnswerController.submitAnswer) {
-        }
-
         <div class="questions">
 
-          @* Question 1 *@
-          @* TODO: make template *@
-          <div class="question__item">
-            <div class="question__title">
-              <span>問一　子どもは全部で何人ですか。</span>
+          @helper.form(action = controllers.form.student.routes.AnswerController.submitAnswer) {
+            @* Question 1 *@
+            @* TODO: make template *@
+            <div class="question__item">
+              @helper.inputRadioGroup(
+                form("answer_first"),
+                Seq("1" -> "四人", "2" -> "五人", "3" -> "六人"),
+                Symbol("_label") -> "問一　子どもは全部で何人ですか。"
+              )
             </div>
-            <div class="question__options">
-              <input type="radio">四人
-              <input type="radio">五人
-              <input type="radio">六人
-            </div>
-          </div>
-        </div>
+          }
 
         @* Answer complete *@
         @* TODO: make tempelate *@

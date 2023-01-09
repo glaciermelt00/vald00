@@ -42,7 +42,12 @@
         display: none;
       }
     }
-    .question__options {
+    .questions {
+      display:        flex;
+      gap:            main.$space-size-large;
+      flex-direction: column;
+    }
+    .buttonset, .info {
       margin:  main.$space-size-large main.$space-size-base 0 0;
       display: flex;
       gap:     main.$space-size-base;
