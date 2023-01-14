@@ -31,6 +31,8 @@ class AnswerController @javax.inject.Inject()(implicit
         ))
       },
       answer => {
+        println("--- submit answer")
+        println(answer)
         // TODO: redirect to problem b page
         Ok(views.html.site.top.Main(
           model.site.SiteViewValueTop.build
