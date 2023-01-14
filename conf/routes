@@ -2,8 +2,17 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+# Top
 GET  /              controllers.site.TopController.view
+
+# Login
+#GET  /login         controllers.login.Application.login
+
+# Problem
 GET  /problem/a     controllers.site.student.ProblemController.viewProblemA
+
+# Answer
+POST /answer        controllers.form.student.AnswerController.submitAnswer
 
 # System
 GET  /ping          controllers.ApplicationController.ping

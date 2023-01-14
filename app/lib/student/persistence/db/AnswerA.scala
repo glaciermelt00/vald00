@@ -12,14 +12,14 @@ import slick.jdbc.JdbcProfile
 import ixias.persistence.model.Table
 
 import java.time.LocalDateTime
-import lib.student.model.AnswerA
+import lib.student.model.Answer
 import lib.udb.model.User
 
 /**
  * Table Definition
  */
 case class AnswerATable[P <: JdbcProfile]()(implicit val driver: P)
-    extends Table[AnswerA, P] with SlickColumnTypes[P] {
+    extends Table[Answer, P] with SlickColumnTypes[P] {
   import api._
 
   // --[ DSN ] -----------------------------------------------------------------
@@ -34,12 +34,12 @@ case class AnswerATable[P <: JdbcProfile]()(implicit val driver: P)
 
   // --[ Table ] ---------------------------------------------------------------
   class Table(tag: Tag) extends BasicTable(tag, "answer_a") {
-    import AnswerA._
+    import Answer._
 
     // Columns
     /* @1  */ def id            = column[Id]                  ("id",              O.UInt64, O.PrimaryKey, O.AutoInc)
     /* @2  */ def uid           = column[User.Id]             ("uid",             O.Int64)
-    /* @3  */ def readScore     = column[Int]                 ("read_score",      O.Int32)
+    /* @3  */ def readAnswer    = column[Long]                ("read_answer",     O.Int64)
     /* @4  */ def speedSilent   = column[Int]                 ("speed_silent",    O.Int32)
     /* @5  */ def speedReply    = column[Int]                 ("speed_reply",     O.Int32)
     /* @6  */ def speedOral     = column[Int]                 ("speed_oral",      O.Int32)
@@ -52,12 +52,19 @@ case class AnswerATable[P <: JdbcProfile]()(implicit val driver: P)
      * 2) Model        => Tuple(table)
      */
     def * = (
-      id.?, uid, readScore.?, speedSilent.?, speedReply.?, speedOral.?, updatedAt, createdAt
+      id.?, uid, readAnswer, speedSilent.?, speedReply.?, speedOral.?, updatedAt, createdAt
     ) <> (
-      (AnswerA.apply   _).tupled,
-      (AnswerA.unapply _).andThen(_.map(_.copy(
-        _7 = LocalDateTime.now
-      )))
+      (Answer.apply   _).tupled.compose(
+        t => t.copy(
+          _3 = Answer.ReadAnswer.apply(t._3)
+        )
+      ),
+      (Answer.unapply _).andThen(_.map(
+        t => t.copy(
+          _3 = Answer.ReadAnswer.toBitset(t._3),
+          _7 = LocalDateTime.now
+        )
+      ))
     )
   }
 }

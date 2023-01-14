@@ -11,13 +11,13 @@ package lib.student.persistence
 import slick.jdbc.JdbcProfile
 import ixias.persistence.SlickRepository
 import scala.concurrent.Future
-import lib.student.model.AnswerA
+import lib.student.model.Answer
 
 /**
  * AnswerA Information
  */
 case class AnswerARepository[P <: JdbcProfile]()(implicit val driver: P)
-    extends SlickRepository[AnswerA.Id, AnswerA, P]
+    extends SlickRepository[Answer.Id, Answer, P]
     with db.SlickResourceProvider[P] {
   import api._
 
