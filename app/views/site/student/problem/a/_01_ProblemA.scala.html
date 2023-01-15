@@ -50,7 +50,7 @@
             @* TODO: make template *@
             <div class="question__item">
               @helper.inputRadioGroup(
-                form("answer_first"),
+                form("answerFirst"),
                 Seq("1" -> "四人", "2" -> "五人", "3" -> "六人"),
                 Symbol("_label") -> "問一　子どもは全部で何人ですか。"
               )
@@ -58,7 +58,7 @@
 
             <div class="question__item">
               @helper.inputRadioGroup(
-                form("answer_second"),
+                form("answerSecond"),
                 Seq("1" -> "中学一年", "2" -> "六年生", "3" -> "五年生"),
                 Symbol("_label") -> "問二　妹は、何年生ですか。"
               )
@@ -66,7 +66,7 @@
 
             <div class="question__item">
               @helper.inputRadioGroup(
-                form("answer_third"),
+                form("answerThird"),
                 Seq("1" -> "四人", "2" -> "五人", "3" -> "六人"),
                 Symbol("_label") -> "問三　学校に行っているのは、家族に何人いますか。"
               )
@@ -74,7 +74,7 @@
 
             <div class="question__item">
               @helper.inputRadioGroup(
-                form("answer_fourth"),
+                form("answerFourth"),
                 Seq("1" -> "三人", "2" -> "四人", "3" -> "五人"),
                 Symbol("_label") -> "問四　私の家族で、仕事をしているのは何人ですか。"
               )
@@ -82,7 +82,7 @@
 
             <div class="question__item">
               @helper.inputRadioGroup(
-                form("answer_fifth"),
+                form("answerFifth"),
                 Seq("1" -> "七人", "2" -> "八人", "3" -> "九人"),
                 Symbol("_label") -> "問五　夕食を一緒に食べるのは何ですか。"
               )

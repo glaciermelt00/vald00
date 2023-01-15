@@ -14,11 +14,11 @@ import play.api.data.Forms._
  * Answer A Data
  */
 case class FormValueAnswerA(
-  answer_first:  String,
-  answer_second: String,
-  answer_third:  String,
-  answer_fourth: String,
-  answer_fifth:  String
+  answerFirst:  String,
+  answerSecond: String,
+  answerThird:  String,
+  answerFourth: String,
+  answerFifth:  String
 )
 
 /**
@@ -27,11 +27,11 @@ case class FormValueAnswerA(
 object FormValueAnswerA {
   val form: Form[FormValueAnswerA] = Form(
     mapping(
-      "answer_first"  -> nonEmptyText,
-      "answer_second" -> nonEmptyText,
-      "answer_third"  -> nonEmptyText,
-      "answer_fourth" -> nonEmptyText,
-      "answer_fifth"  -> nonEmptyText
+      "answerFirst"  -> nonEmptyText,
+      "answerSecond" -> nonEmptyText,
+      "answerThird"  -> nonEmptyText,
+      "answerFourth" -> nonEmptyText,
+      "answerFifth"  -> nonEmptyText
     )(FormValueAnswerA.apply)(FormValueAnswerA.unapply)
   )
 }

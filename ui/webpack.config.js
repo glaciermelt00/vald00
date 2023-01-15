@@ -44,6 +44,7 @@ function getPlugin(mode) {
 function getEntries() {
   return {
     'common':    [ './scss/10-common/index.scss'      ],
+    'login':     [ './scss/11-login/index.scss'       ],
     'problem-a': [ './scss/13-problem-a/index.scss'   ],
   };
 }
