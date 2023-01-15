@@ -1,0 +1,45 @@
+/*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+@use 'sass:map';
+@use 'theming' as main;
+
+#site-login {
+
+  .inner__head {
+    display:         flex;
+    justify-content: center;
+    font-size:       main.$font-size-4xlarge;
+  }
+  .inner__content {
+    margin-top:      main.$space-size-large;
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+
+    .sub-title {
+      margin-bottom:   main.$space-size-large;
+      display:         flex;
+      justify-content: center;
+    }
+    .form__inner {
+      width:          280px;
+      margin:         auto;
+      display:        flex;
+      flex-direction: column;
+
+      .form__item {
+        margin-bottom:  main.$space-size-medium;
+
+        #userNumber,
+        #password {
+          width: 280px - 8px;
+        }
+      }
+    }
+  }
+}

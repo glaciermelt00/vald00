@@ -1,0 +1,60 @@
+@*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ *@
+
+@**
+ * Login page
+ *@
+
+@import play.api.data._
+@import play.api.i18n.MessagesProvider
+@import views.html.helper
+@import model.form.auth.FormValueLogin
+
+@(form: Form[FormValueLogin])(implicit messagesProvider: MessagesProvider)
+@views.html.common.layout.Section(
+  sectionId = "site-login"
+) {
+  <div class="inner__head">
+    <h2>ログイン</h2>
+  </div>
+  <div class="inner__content">
+    <div class="content__wrapper">
+
+      @* Sub title *@
+      <div class="sub-title">
+        <span>VALD(仮) (受験用) にログインしましょう！</span>
+      </div>
+
+      @helper.form(action = controllers.form.auth.routes.LoginController.submitLogin) {
+        <div class="form__inner">
+
+          @* User number *@
+          <div class="form__item">
+            @helper.inputText(
+              form("userNumber"),
+              Symbol("_label") -> "ユーザー番号"
+            )
+          </div>
+
+          @* Password *@
+          <div class="form__item">
+            @helper.inputPassword(
+              form("password"),
+              Symbol("_label") -> "パスワード"
+            )
+          </div>
+
+          @* Submit login *@
+          <button class="form__submit">
+            ログイン
+          </button>
+        </div>
+      }
+
+    </div>
+  </div>
+}

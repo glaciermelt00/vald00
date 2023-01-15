@@ -83,8 +83,8 @@ scalacOptions ++= Seq(
 )
 
 javaOptions ++= Seq(
-  "-Dconfig.file=conf/env.dev/application.conf",
-  "-Dlogger.file=conf/env.dev/logback.xml"
+  "-Dconfig.file=conf/env.local/application.conf",
+  "-Dlogger.file=conf/env.local/logback.xml"
 )
 Universal / javaOptions ++= Seq(
   "-Dpidfile.path=/dev/null"
