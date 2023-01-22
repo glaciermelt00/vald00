@@ -7,7 +7,7 @@
 
 package controllers.site
 
-import ixias.security.PBKDF2
+//import ixias.security.PBKDF2
 
 import play.api.mvc._
 import play.api.i18n.I18nSupport
@@ -25,11 +25,11 @@ class TopController @javax.inject.Inject()(implicit
   def view = Action { implicit request => {
         println("--- top")
         println(request.attrs)
-        println(request.attrs.get(action.auth.AttrKey.User))
-        println("hash")
-        println(PBKDF2.hash("hash"))
-        println(PBKDF2.hash("hash").length)
-        println(PBKDF2.compare("hash", PBKDF2.hash("hash")))
+        println(request.attrs.get(action.auth.AttrKey.Token))
+//        println("hash")
+//        println(PBKDF2.hash("hash"))
+//        println(PBKDF2.hash("hash").length)
+//        println(PBKDF2.compare("hash", PBKDF2.hash("hash")))
     Ok(views.html.site.top.Main(
       model.site.SiteViewValueTop.build
     ))

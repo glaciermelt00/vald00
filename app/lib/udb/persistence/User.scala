@@ -41,6 +41,15 @@ case class UserRepository[P <: JdbcProfile]()(implicit val driver: P)
       .result
     }
 
+  /**
+   * Get User data by no
+   */
+  def findByNo(no: Int): Future[Option[EntityEmbeddedId]] =
+    RunDBAction(UserTable, "slave") { _
+      .filter(_.no === no)
+      .result.headOption
+    }
+
   // --[ Methods ]--------------------------------------------------------------
   /**
    * Add User data

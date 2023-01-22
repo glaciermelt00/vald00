@@ -11,19 +11,19 @@ import cats.data.EitherT
 import cats.implicits._
 import scala.concurrent.{ Future, ExecutionContext }
 
-import play.api.Environment
 import play.api.mvc.Results._
 import play.api.mvc.{ Request, Result, ActionRefiner }
 
 import lib.udb.persistence.default.{ AuthRepository, UserRepository }
 
 /**
- * Authenticate as admin Via session-token
+ * Authenticate via session-token
  */
 case class Authenticated()(implicit
-  val env:              Environment,
-  val executionContext: ExecutionContext
+  val ex: ExecutionContext
 ) extends ActionRefiner[Request, Request] {
+
+  override def executionContext: ExecutionContext = ex
 
   /**
    * Determine how to process a request
