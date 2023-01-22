@@ -60,8 +60,8 @@ case class Login()(implicit
           case false => Left(Unauthorized("Could not match user number and password"))
         }
     } map {
-      case auth
-        => request.addAttr(mvc.ActionAttrKey.auth.Token, auth.v.token)
+      case auth =>
+        request.addAttr(mvc.ActionAttrKey.auth.Token, auth.v.token)
     }).value
   }
 }
