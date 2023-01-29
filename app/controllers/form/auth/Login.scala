@@ -25,35 +25,36 @@ class LoginController @javax.inject.Inject()(implicit
   /**
    * Submit login
    */
-  def submitLogin =
-    (Action andThen action.auth.Login) { implicit request =>
-      FormValueLogin.form.bindFromRequest.fold(
-        formWithErrors => {
-          BadRequest(views.html.site.auth.login.Main(
-            model.site.auth.SiteViewValueLogin.build,
-            formWithErrors
-          ))
-        },
-        login => {
-          println("--- submit login")
-          println(login)
-          println(request.attrs)
-          println(request.attrs.get(action.auth.AttrKey.Token))
-          println(login.password)
-          println(Auth.Token(login.password))
-          println(Auth.Token(login.password).length)
-          println(PBKDF2.compare(login.password, Auth.Token(login.password)))
-          request.addAttr(action.auth.AttrKey.Token, Auth.Token(login.password))
-          val attrs = request.attrs
-          val token = request.attrs.get(action.auth.AttrKey.Token)
-          println(request.addAttr(action.auth.AttrKey.Token, Auth.Token(login.password)))
-          println(attrs)
-          println(token)
-          // TODO: redirect to my page
-          Ok(views.html.site.top.Main(
-            model.site.SiteViewValueTop.build
-          ))
-        }
-      )
-    }
+  def submitLogin = (
+    Action andThen action.auth.Login
+  ) { implicit request =>
+    FormValueLogin.form.bindFromRequest.fold(
+      formWithErrors => {
+        BadRequest(views.html.site.auth.login.Main(
+          model.site.auth.SiteViewValueLogin.build,
+          formWithErrors
+        ))
+      },
+      login => {
+        println("--- submit login")
+        println(login)
+        println(request.attrs)
+        println(request.attrs.get(action.auth.AttrKey.Token))
+        println(login.password)
+        println(Auth.Token(login.password))
+        println(Auth.Token(login.password).length)
+        println(PBKDF2.compare(login.password, Auth.Token(login.password)))
+        request.addAttr(action.auth.AttrKey.Token, Auth.Token(login.password))
+        val attrs = request.attrs
+        val token = request.attrs.get(action.auth.AttrKey.Token)
+        println(request.addAttr(action.auth.AttrKey.Token, Auth.Token(login.password)))
+        println(attrs)
+        println(token)
+        // TODO: redirect to my page
+        Ok(views.html.site.top.Main(
+          model.site.SiteViewValueTop.build
+        ))
+      }
+    )
+  }
 }
