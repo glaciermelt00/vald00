@@ -19,9 +19,11 @@ trait SlickResourceProvider[P <: JdbcProfile] extends SlickColumnTypes[P] {
 
   // --[ Table ] ---------------------------------------------------------------
   object UserTable extends UserTable
+  object AuthTable extends AuthTable
 
   // --[ All Tables ] ----------------------------------------------------------
   lazy val AllTables = Seq(
-    UserTable
+    UserTable,
+    AuthTable
   )
 }

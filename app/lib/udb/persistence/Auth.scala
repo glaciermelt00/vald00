@@ -11,59 +11,68 @@ package lib.udb.persistence
 import slick.jdbc.JdbcProfile
 import ixias.persistence.SlickRepository
 import scala.concurrent.Future
-import lib.udb.model.User
+import lib.udb.model.{ Auth, User }
 
 /**
- * User Information
+ * Auth Information
  */
-case class UserRepository[P <: JdbcProfile]()(implicit val driver: P)
-    extends SlickRepository[User.Id, User, P]
+case class AuthRepository[P <: JdbcProfile]()(implicit val driver: P)
+    extends SlickRepository[Auth.Id, Auth, P]
     with db.SlickResourceProvider[P] {
   import api._
 
   // --[ Methods ]--------------------------------------------------------------
   /**
-   * Get User data
+   * Get Auth data
    */
   def get(id: Id): Future[Option[EntityEmbeddedId]] =
-    RunDBAction(UserTable, "slave") { _
+    RunDBAction(AuthTable, "slave") { _
       .filter(_.id === id)
       .result.headOption
     }
 
   /**
-   * Get User data
+   * Get Auth data
    */
   def seek(cursor: Cursor): Future[Seq[EntityEmbeddedId]] =
-    RunDBAction(UserTable, "slave") { _
+    RunDBAction(AuthTable, "slave") { _
       .sortBy(_.id.desc)
       .seek(cursor)
       .result
     }
 
   /**
-   * Get User data by no
+   * Get Auth by user id
    */
-  def findByNo(no: Int): Future[Option[EntityEmbeddedId]] =
-    RunDBAction(UserTable, "slave") { _
-      .filter(_.no === no)
+  def findByUserId(uid: User.Id): Future[Option[EntityEmbeddedId]] =
+    RunDBAction(AuthTable, "slave") { _
+      .filter(_.uid === uid)
+      .result.headOption
+    }
+
+  /**
+   * Get Auth by token
+   */
+  def findByToken(token: Auth.Token): Future[Option[EntityEmbeddedId]] =
+    RunDBAction(AuthTable, "slave") { _
+      .filter(_.token === token)
       .result.headOption
     }
 
   // --[ Methods ]--------------------------------------------------------------
   /**
-   * Add User data
+   * Add Auth data
    */
   def add(data: EntityWithNoId): Future[Id] =
-    RunDBAction(UserTable) { slick =>
+    RunDBAction(AuthTable) { slick =>
       slick returning slick.map(_.id) += data.v
     }
 
   /**
-   * Update User data
+   * Update Auth data
    */
   def update(data: EntityEmbeddedId): Future[Option[EntityEmbeddedId]] =
-    RunDBAction(UserTable) { slick =>
+    RunDBAction(AuthTable) { slick =>
       val row = slick.filter(_.id === data.id)
       for {
         old <- row.result.headOption
@@ -75,10 +84,10 @@ case class UserRepository[P <: JdbcProfile]()(implicit val driver: P)
     }
 
   /**
-   * Eliminate specified User data
+   * Eliminate specified Auth data
    */
   def remove(id: Id): Future[Option[EntityEmbeddedId]] =
-    RunDBAction(UserTable) { slick =>
+    RunDBAction(AuthTable) { slick =>
       val row = slick.filter(_.id === id)
       for {
         old <- row.result.headOption

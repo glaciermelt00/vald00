@@ -7,12 +7,11 @@
 
 package mvc
 
+import ixias.play.api.mvc.BaseExtensionMethods
+
 import play.api.mvc._
-import ixias.play.api.auth.mvc.{ AuthProfile, AuthExtensionMethods }
 
-import lib.udb.model.User
-
-trait ExtensionMethods extends AuthExtensionMethods {
+trait ExtensionMethods extends BaseExtensionMethods {
   self: BaseController =>
 
   implicit lazy val parser = parse.default
@@ -26,7 +25,8 @@ trait ExtensionMethods extends AuthExtensionMethods {
      */
     object auth {
       val AttrKey = ActionAttrKey.auth
-      def Authenticatedd(auth: AuthProfile[User.Id, User, String]) = Authenticated(auth)
+      def Login         = mvc.action.Login()
+      def Authenticated = mvc.action.Authenticated()
     }
   }
 }

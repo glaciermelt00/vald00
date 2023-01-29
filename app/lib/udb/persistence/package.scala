@@ -16,6 +16,9 @@ package object persistence {
   object default {
     implicit val driver = slick.jdbc.MySQLProfile
 
+    //- For Auth
+    val AuthRepository = persistence.AuthRepository()
+
     //- For User
     val UserRepository = persistence.UserRepository()
   }

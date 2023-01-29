@@ -14,7 +14,7 @@ import play.api.data.Forms._
  * Login Data
  */
 case class FormValueLogin(
-  userNumber: String,
+  userNumber: Int,
   password:   String
 )
 
@@ -24,7 +24,7 @@ case class FormValueLogin(
 object FormValueLogin {
   val form: Form[FormValueLogin] = Form(
     mapping(
-      "userNumber" -> nonEmptyText,
+      "userNumber" -> number(min= 0, max = 10000),
       "password"   -> nonEmptyText
     )(FormValueLogin.apply)(FormValueLogin.unapply)
   )
