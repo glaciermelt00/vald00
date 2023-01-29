@@ -48,7 +48,7 @@ case class Login()(implicit
       case value =>
         UserRepository.findByNo(value.userNumber).map({
           case Some(user) => Right((user, value.password))
-          case None       => Left(Unauthorized("Could not match user number and password"))
+          case None       => Left(Unauthorized("Could not match user number and password #1"))
         })
     } flatMapF {
       case (user, inputPass) =>
@@ -57,7 +57,7 @@ case class Login()(implicit
           token       = auth.v.token
         } yield PBKDF2.compare(inputPass, token) match {
           case true  => Right(auth)
-          case false => Left(Unauthorized("Could not match user number and password"))
+          case false => Left(Unauthorized("Could not match user number and password #2"))
         }
     } map {
       case auth =>

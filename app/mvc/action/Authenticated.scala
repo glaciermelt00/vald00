@@ -28,9 +28,14 @@ case class Authenticated()(implicit
   /**
    * Determine how to process a request
    */
-  def refine[A](request: Request[A]): Future[Either[Result, Request[A]]] =
+  def refine[A](request: Request[A]): Future[Either[Result, Request[A]]] = {
+    println("--- authenticated refine")
+    println(request)
+    println(request.attrs)
+    println(request.attrs.get(mvc.ActionAttrKey.auth.Token))
+    println(request.session.get(mvc.ActionAttrKey.auth.COOKIES_NAME))
     (EitherT.fromEither[Future] {
-      request.attrs.get(mvc.ActionAttrKey.auth.Token) match {
+      request.session.get(mvc.ActionAttrKey.auth.COOKIES_NAME) match {
         case Some(v) => Right(v)
         case None    => Left(Unauthorized("Not found Authorization token"))
       }
@@ -50,4 +55,5 @@ case class Authenticated()(implicit
       case user =>
         request.addAttr(mvc.ActionAttrKey.auth.User, user)
     }).value
+  }
 }

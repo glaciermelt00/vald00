@@ -8,7 +8,8 @@ GET  /              controllers.site.TopController.view
 # Login
 GET  /login         controllers.site.auth.LoginController.viewLogin
 
-# Problem
+# Student
+GET  /mypage        controllers.site.student.MyPageController.viewMyPage
 GET  /problem/a     controllers.site.student.ProblemController.viewProblemA
 
 # Form

@@ -44,16 +44,15 @@ class LoginController @javax.inject.Inject()(implicit
         println(Auth.Token(login.password))
         println(Auth.Token(login.password).length)
         println(PBKDF2.compare(login.password, Auth.Token(login.password)))
-        request.addAttr(action.auth.AttrKey.Token, Auth.Token(login.password))
+        //request.addAttr(action.auth.AttrKey.Token, Auth.Token(login.password))
         val attrs = request.attrs
         val token = request.attrs.get(action.auth.AttrKey.Token)
         println(request.addAttr(action.auth.AttrKey.Token, Auth.Token(login.password)))
         println(attrs)
         println(token)
         // TODO: redirect to my page
-        Ok(views.html.site.top.Main(
-          model.site.SiteViewValueTop.build
-        ))
+        Redirect(controllers.site.student.routes.MyPageController.viewMyPage)
+          .withSession(mvc.ActionAttrKey.auth.COOKIES_NAME -> Auth.Token(login.password))
       }
     )
   }

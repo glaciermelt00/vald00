@@ -1,0 +1,19 @@
+@*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ *@
+
+@(
+  vv: model.site.student.SiteViewValueMyPage
+)
+@views.html.common.layout.Default(vv.layout) {
+  @views.html.common.layout.ContentLayout(
+    id      = "content",
+    content = tplContent
+  )
+}
+@tplContent = {
+  @views.html.site.student.mypage._01_MyPage()
+}
