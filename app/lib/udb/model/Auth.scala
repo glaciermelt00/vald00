@@ -42,7 +42,7 @@ object Auth {
     /**
      * Create a token object by string
      */
-    def apply(str: String): Token =
+    def build(str: String): Token =
       the[Identity[Token]].apply(
         PBKDF2.hash(str)
       )

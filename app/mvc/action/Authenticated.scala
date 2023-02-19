@@ -14,6 +14,7 @@ import scala.concurrent.{ Future, ExecutionContext }
 import play.api.mvc.Results._
 import play.api.mvc.{ Request, Result, ActionRefiner }
 
+import lib.udb.model.Auth
 import lib.udb.persistence.default.{ AuthRepository, UserRepository }
 
 /**
@@ -40,16 +41,26 @@ case class Authenticated()(implicit
         case None    => Left(Unauthorized("Not found Authorization token"))
       }
     } flatMapF {
-      case token =>
-        AuthRepository.findByToken(token).map({
+      case token => {
+        println("--- after token")
+        println(token)
+        println(Auth.Token(token))
+        for {
+          v1 <- AuthRepository.findByToken(Auth.Token(token))
+          _ = {
+            println(v1)
+          }
+        } yield v1
+        AuthRepository.findByToken(Auth.Token(token)).map({
           case Some(auth) => Right(auth)
-          case None       => Left(Unauthorized("Could not reference data from Access Token"))
+          case None       => Left(Unauthorized("Could not reference data from Access Token #1"))
         })
+      }
     } flatMapF {
       case auth =>
         UserRepository.get(auth.v.uid).map({
           case Some(user) => Right(user)
-          case None       => Left(Unauthorized("Could not reference user from Access Token"))
+          case None       => Left(Unauthorized("Could not reference user from Access Token #2"))
         })
     } map {
       case user =>

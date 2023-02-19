@@ -20,7 +20,7 @@ class MyPageController @javax.inject.Inject()(implicit
   /**
    * Display page.
    */
-  def viewMyPage = (
+  def view = (
     Action andThen action.auth.Authenticated
   ) { implicit request =>
     Ok(views.html.site.student.mypage.Main(

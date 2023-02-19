@@ -6,17 +6,17 @@
 GET  /              controllers.site.TopController.view
 
 # Login
-GET  /login         controllers.site.auth.LoginController.viewLogin
+GET  /login         controllers.site.auth.LoginController.view
+POST /login         controllers.site.auth.LoginController.commit
 
 # Student
-GET  /mypage        controllers.site.student.MyPageController.viewMyPage
+GET  /mypage        controllers.site.student.MyPageController.view
 GET  /problem/a     controllers.site.student.ProblemController.viewProblemA
 
 # Form
-POST /login         controllers.form.auth.LoginController.submitLogin
 POST /answer        controllers.form.student.AnswerController.submitAnswer
 
 # System
 GET  /ping          controllers.ApplicationController.ping
 GET  /assets/*file  ixias.play.api.controllers.UIAssets.versioned(path = "/public", file)
-GET  /*path         controllers.ApplicationController.redirect(to = "/", path)
+#GET  /*path         controllers.ApplicationController.redirect(to = "/", path)

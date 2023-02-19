@@ -17,7 +17,7 @@ import play.api.mvc.Results._
 import play.api.mvc.{ Request, Result, ActionRefiner }
 
 import lib.udb.persistence.default.{ AuthRepository, UserRepository }
-import model.form.auth.FormValueLogin
+import model.auth.SendLogin
 
 /**
  * Login and add token to session
@@ -34,13 +34,10 @@ case class Login()(implicit
   def refine[A](request: Request[A]): Future[Either[Result, Request[A]]] = {
     println("--- login refine")
     println(request)
-    println(lib.udb.model.Auth.Token("1101"))
-    println(FormValueLogin.form.bindFromRequest(FormBinding.Implicits.formBinding(request)))
+    println(lib.udb.model.Auth.Token.build("1101"))
 
     (EitherT.fromEither[Future] {
-      FormValueLogin.form.bindFromRequest(
-        FormBinding.Implicits.formBinding(request)
-      ).value match {
+      request.cookies.get(mvc.ActionAttrKey.auth.COOKIES_NAME).map(_.value) match {
         case Some(v) => Right(v)
         case None    => Left(Unauthorized("Not found login info"))
       }
