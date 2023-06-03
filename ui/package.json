@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "cross-env": "6.0.3",
-    "css-loader": "6.7.3",
+    "css-loader": "3.6.0",
     "file-loader": "6.2.0",
     "font-awesome": "4.7.0",
     "fs": "0.0.2",
@@ -16,7 +16,7 @@
     "jquery": "3.4.1",
     "jquery-validation": "1.19.1",
     "jquery.loadtemplate": "1.5.10",
-    "mini-css-extract-plugin": "2.7.2",
+    "mini-css-extract-plugin": "0.12.0",
     "moment": "2.24.0",
     "optimize-css-assets-webpack-plugin": "4.0.3",
     "postcss-loader": "2.1.5",
