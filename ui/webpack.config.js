@@ -8,9 +8,11 @@
 const webpack                 = require('webpack');
 const path                    = require('path');
 const TsconfigPathsPlugin     = require('tsconfig-paths-webpack-plugin');
-const UglifyJsPlugin          = require('uglifyjs-webpack-plugin');
+//const UglifyJsPlugin          = require('uglifyjs-webpack-plugin');
+const TerserPlugin            = require('terser-webpack-plugin');
 const ExtractTextPlugin       = require("extract-text-webpack-plugin");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+//const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin      = require('css-minimizer-webpack-plugin');
 const ManifestPlugin          = require("webpack-manifest-plugin");
 const PACKAGE                 = require('./package.json');
 
@@ -24,12 +26,12 @@ function getPlugin(mode) {
       }),
       new ManifestPlugin(),
       new ExtractTextPlugin({ filename:'[name]/styles.css', allChunks: true }),
-      new OptimizeCssAssetsPlugin({
-        assetNameRegExp: /\.css$/g,
-        cssProcessor: require('cssnano'),
-        cssProcessorOptions: { safe: true, autoprefixer: {remove: false}, discardComments: { removeAll: true } },
-        canPrint: true
-      })
+//      new OptimizeCssAssetsPlugin({
+//        assetNameRegExp: /\.css$/g,
+//        cssProcessor: require('cssnano'),
+//        cssProcessorOptions: { safe: true, autoprefixer: {remove: false}, discardComments: { removeAll: true } },
+//        canPrint: true
+//      })
     ];
   } else {
     return [
@@ -64,7 +66,11 @@ module.exports = (env, argv) => {
       path:     path.resolve(__dirname, 'dist'),
       filename:  '[name]/scripts.js'
     },
-    optimization: { minimizer: [ new UglifyJsPlugin() ] },
+    optimization: { minimizer: [
+//      new UglifyJsPlugin(),
+      new TerserPlugin(),
+      new CssMinimizerPlugin(),
+    ] },
     performance: { hints: false },
     module: {
       rules: [
