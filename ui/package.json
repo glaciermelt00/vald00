@@ -3,9 +3,9 @@
   "version": "1.0.0-SNAPSHOT.0",
   "license": "MIT",
   "scripts": {
-    "build": "NODE_ENV=development webpack --mode development         --progress --colors",
-    "build.watch": "NODE_ENV=development webpack --mode development --watch --progress --colors",
-    "build.prod": "NODE_ENV=production  webpack --mode production  -p      --progress --colors"
+    "build":       "NODE_ENV=development webpack --mode development         --progress",
+    "build.watch": "NODE_ENV=development webpack --mode development --watch --progress",
+    "build.prod":  "NODE_ENV=production  webpack --mode production  -p      --progress"
   },
   "devDependencies": {
     "cross-env": "7.0.3",
