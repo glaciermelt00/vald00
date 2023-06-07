@@ -8,10 +8,10 @@
 const webpack                 = require('webpack');
 const path                    = require('path');
 const TsconfigPathsPlugin     = require('tsconfig-paths-webpack-plugin');
-const UglifyJsPlugin          = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin       = require("extract-text-webpack-plugin");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const ManifestPlugin          = require("webpack-manifest-plugin");
+const TerserPlugin            = require('terser-webpack-plugin');
+const CssMinimizerPlugin      = require('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin    = require('mini-css-extract-plugin');
+const ManifestPlugin          = require('webpack-manifest-plugin');
 const PACKAGE                 = require('./package.json');
 
 const environment = process.env.NODE_ENV ? process.env.NODE_ENV : "development";
@@ -23,20 +23,14 @@ function getPlugin(mode) {
         'NODE_ENV': JSON.stringify(environment)
       }),
       new ManifestPlugin(),
-      new ExtractTextPlugin({ filename:'[name]/styles.css', allChunks: true }),
-      new OptimizeCssAssetsPlugin({
-        assetNameRegExp: /\.css$/g,
-        cssProcessor: require('cssnano'),
-        cssProcessorOptions: { safe: true, autoprefixer: {remove: false}, discardComments: { removeAll: true } },
-        canPrint: true
-      })
+      new MiniCssExtractPlugin({ filename:'[name]/styles.css', allChunks: true }),
     ];
   } else {
     return [
       new webpack.DefinePlugin({
         'NODE_ENV': JSON.stringify(environment)
       }),
-      new ExtractTextPlugin({ filename: '[name]/styles.css', allChunks: true })
+      new MiniCssExtractPlugin({ filename: '[name]/styles.css' })
     ];
   }
 }
@@ -64,7 +58,10 @@ module.exports = (env, argv) => {
       path:     path.resolve(__dirname, 'dist'),
       filename:  '[name]/scripts.js'
     },
-    optimization: { minimizer: [ new UglifyJsPlugin() ] },
+    optimization: { minimizer: [
+      new TerserPlugin(),
+      new CssMinimizerPlugin(),
+    ] },
     performance: { hints: false },
     module: {
       rules: [
@@ -74,15 +71,18 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.scss$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              { loader: 'css-loader' },
-              { loader: 'sass-loader', options: {
-                includePaths: [ 'node_modules', 'shared/scss' ]
-              } }
-            ]
-          })
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                sassOptions: {
+                  includePaths: [ 'node_modules', 'shared/scss' ]
+                }
+              }
+            }
+          ]
         },
         {
           test: /\.(jpg|jpeg|png)$/,
