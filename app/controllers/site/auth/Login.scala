@@ -43,6 +43,7 @@ class LoginController @javax.inject.Inject()(implicit
   def commit =
     Action.async { implicit request =>
       EitherT.fromEither[Future] {
+        //- 定義すべきかも
         FormHelper.bindFromRequest(tuple(
           "userNumber" -> number(min = 0, max = 10000),
           "password"   -> nonEmptyText
