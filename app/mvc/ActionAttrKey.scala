@@ -18,7 +18,8 @@ object ActionAttrKey {
    * For authentication
    */
   object auth {
-    val Token = TypedKey[lib.udb.model.Auth.Token]
-    val User  = TypedKey[lib.udb.model.User#EmbeddedId]
+    val COOKIES_NAME  = "Login-info"
+    val Token         = TypedKey[lib.udb.model.Auth.Token]
+    val User          = TypedKey[lib.udb.model.User#EmbeddedId]
   }
 }

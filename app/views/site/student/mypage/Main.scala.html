@@ -5,14 +5,9 @@
  * please view the LICENSE file that was distributed with this source code.
  *@
 
-@import play.api.data._
-@import play.api.i18n.MessagesProvider
-@import model.auth.SendLogin
-
 @(
-  vv:   model.site.auth.SiteViewValueLogin,
-  form: Form[SendLogin]
-)(implicit messagesProvider: MessagesProvider)
+  vv: model.site.student.SiteViewValueMyPage
+)
 @views.html.common.layout.Default(vv.layout) {
   @views.html.common.layout.ContentLayout(
     id      = "content",
@@ -20,5 +15,5 @@
   )
 }
 @tplContent = {
-  @views.html.site.auth.login._01_Login(form)
+  @views.html.site.student.mypage._01_MyPage()
 }

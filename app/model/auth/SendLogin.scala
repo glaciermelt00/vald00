@@ -5,15 +5,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-package model.form.auth
+package model.auth
 
 import play.api.data._
 import play.api.data.Forms._
+import play.api.libs.json._
 
 /**
  * Login Data
  */
-case class FormValueLogin(
+case class SendLogin(
   userNumber: Int,
   password:   String
 )
@@ -21,11 +22,16 @@ case class FormValueLogin(
 /**
  * Companion object
  */
-object FormValueLogin {
-  val form: Form[FormValueLogin] = Form(
+object SendLogin {
+
+  // --[ Form: Binding ]--------------------------------------------------------
+  val form: Form[SendLogin] = Form(
     mapping(
       "userNumber" -> number(min= 0, max = 10000),
       "password"   -> nonEmptyText
-    )(FormValueLogin.apply)(FormValueLogin.unapply)
+    )(SendLogin.apply)(SendLogin.unapply)
   )
+
+  // --[ JSON : Combinator ]----------------------------------------------------
+  implicit val reads = Json.reads[SendLogin]
 }

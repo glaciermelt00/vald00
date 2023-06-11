@@ -20,11 +20,12 @@ trait ExtensionMethods extends BaseExtensionMethods {
    * Action Helper
    */
   object action {
-    /*V
+
+    /**
      * For authentication
      */
     object auth {
-      val AttrKey = ActionAttrKey.auth
+      val AttrKey       = ActionAttrKey.auth
       def Login         = mvc.action.Login()
       def Authenticated = mvc.action.Authenticated()
     }
