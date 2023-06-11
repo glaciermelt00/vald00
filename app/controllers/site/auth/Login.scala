@@ -55,10 +55,10 @@ class LoginController @javax.inject.Inject()(implicit
           println(post)
           println(post._1)
           println(post._2)
-          println(Auth.Token.build(post._2))
-          println(PBKDF2.compare(post._2, Auth.Token.build(post._2)))
+          println(Auth.buildToken(post._2))
+          println(PBKDF2.compare(post._2, Auth.buildToken(post._2)))
           val data  = (SendLogin.apply _).tupled(post)
-          val token = Auth.Token.build(data.password)
+          val token = Auth.buildToken(data.password)
           for {
             Some(auth) <- AuthRepository.findByToken(token)
             result      = Redirect(controllers.site.student.routes.MyPageController.view)

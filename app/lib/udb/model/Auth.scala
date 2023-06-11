@@ -30,21 +30,14 @@ object Auth {
 
   // --[ New Types ]------------------------------------------------------------
   val  Id    = the[Identity[Id]]
+  val  Token = the[Identity[Token]]
   type Id    = Long   @@ Auth
-  type Token = String @@ Token.type
+  type Token = String @@ Auth
 
-  // --[ New Types ]------------------------------------------------------------
   /**
-   * The token of Auth
+   * Create a token object by string
    */
-  object Token {
-
-    /**
-     * Create a token object by string
-     */
-    def build(str: String): Token =
-      the[Identity[Token]].apply(
-        PBKDF2.hash(str)
-      )
-  }
+  def buildToken(str: String): Token = Token(
+    PBKDF2.hash(str)
+  )
 }

@@ -27,9 +27,12 @@
       @include main.writing-mode(vertical-rl);
     }
     .reading__complete {
-      width:       main.$space-size-xlarge;
-      font-size:   main.$font-size-base;
-      line-height: main.$font-size-base;
+      width:           main.$space-size-xlarge;
+      font-size:       main.$font-size-base;
+      line-height:     main.$font-size-base;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
       &.display-none {
         display: none;
       }

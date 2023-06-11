@@ -33,25 +33,24 @@ case class Authenticated()(implicit
     println("--- authenticated refine")
     println(request)
     println(request.attrs)
-    println(request.attrs.get(mvc.ActionAttrKey.auth.Token))
+    println(request.cookies.get(mvc.ActionAttrKey.auth.COOKIES_NAME))
     println(request.session.get(mvc.ActionAttrKey.auth.COOKIES_NAME))
     (EitherT.fromEither[Future] {
-      request.session.get(mvc.ActionAttrKey.auth.COOKIES_NAME) match {
-        case Some(v) => Right(v)
+      request.cookies.get(mvc.ActionAttrKey.auth.COOKIES_NAME) match {
+        case Some(v) => Right(v.value)
         case None    => Left(Unauthorized("Not found Authorization token"))
       }
     } flatMapF {
       case token => {
         println("--- after token")
         println(token)
-        println(Auth.Token.build(token))
         for {
-          v1 <- AuthRepository.findByToken(Auth.Token.build(token))
+          v1 <- AuthRepository.findByToken(Auth.Token(token))
           _ = {
             println(v1)
           }
         } yield v1
-        AuthRepository.findByToken(Auth.Token.build(token)).map({
+        AuthRepository.findByToken(Auth.Token(token)).map({
           case Some(auth) => Right(auth)
           case None       => Left(Unauthorized("Could not reference data from Access Token #1"))
         })

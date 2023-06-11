@@ -34,7 +34,7 @@ case class Login()(implicit
   def refine[A](request: Request[A]): Future[Either[Result, Request[A]]] = {
     println("--- login refine")
     println(request)
-    println(lib.udb.model.Auth.Token.build("1101"))
+    println(lib.udb.model.Auth.buildToken("1101"))
 
     (EitherT.fromEither[Future] {
       request.cookies.get(mvc.ActionAttrKey.auth.COOKIES_NAME).map(_.value) match {
