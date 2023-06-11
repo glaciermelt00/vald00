@@ -7,6 +7,10 @@
 
 package model.auth
 
+import play.api.data._
+import play.api.data.Forms._
+import play.api.libs.json._
+
 /**
  * Login Data
  */
@@ -14,3 +18,20 @@ case class SendLogin(
   userNumber: Int,
   password:   String
 )
+
+/**
+ * Companion object
+ */
+object SendLogin {
+
+  // --[ Form: Binding ]--------------------------------------------------------
+  val form: Form[SendLogin] = Form(
+    mapping(
+      "userNumber" -> number(min= 0, max = 10000),
+      "password"   -> nonEmptyText
+    )(SendLogin.apply)(SendLogin.unapply)
+  )
+
+  // --[ JSON : Combinator ]----------------------------------------------------
+  implicit val reads = Json.reads[SendLogin]
+}

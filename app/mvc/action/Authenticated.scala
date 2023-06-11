@@ -44,14 +44,14 @@ case class Authenticated()(implicit
       case token => {
         println("--- after token")
         println(token)
-        println(Auth.Token(token))
+        println(Auth.Token.build(token))
         for {
-          v1 <- AuthRepository.findByToken(Auth.Token(token))
+          v1 <- AuthRepository.findByToken(Auth.Token.build(token))
           _ = {
             println(v1)
           }
         } yield v1
-        AuthRepository.findByToken(Auth.Token(token)).map({
+        AuthRepository.findByToken(Auth.Token.build(token)).map({
           case Some(auth) => Right(auth)
           case None       => Left(Unauthorized("Could not reference data from Access Token #1"))
         })

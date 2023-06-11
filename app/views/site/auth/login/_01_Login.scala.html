@@ -11,9 +11,10 @@
 
 @import play.api.data._
 @import play.api.i18n.MessagesProvider
+@import model.auth.SendLogin
 @import views.html.helper
 
-@()(implicit messagesProvider: MessagesProvider)
+@(form: Form[SendLogin])(implicit messagesProvider: MessagesProvider)
 @views.html.common.layout.Section(
   sectionId = "site-login"
 ) {
@@ -28,7 +29,7 @@
         <span>VALD(仮) (受験用) にログインしましょう！</span>
       </div>
 
-      @helper.form(action = controllers.form.auth.routes.LoginController.commit) {
+      @helper.form(action = controllers.site.auth.routes.LoginController.commit) {
         <div class="form__inner">
 
           @* User number *@

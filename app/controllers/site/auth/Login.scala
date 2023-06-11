@@ -33,7 +33,8 @@ class LoginController @javax.inject.Inject()(implicit
   def view = Action { implicit request => {
     println("--- view")
     Ok(views.html.site.auth.login.Main(
-      model.site.auth.SiteViewValueLogin.build
+      model.site.auth.SiteViewValueLogin.build,
+      SendLogin.form
     ))
   }}
 

@@ -12,7 +12,7 @@ import cats.implicits._
 import ixias.security.PBKDF2
 import scala.concurrent.{ Future, ExecutionContext }
 
-import play.api.data.FormBinding
+import play.api.libs.json.Json
 import play.api.mvc.Results._
 import play.api.mvc.{ Request, Result, ActionRefiner }
 
@@ -38,7 +38,9 @@ case class Login()(implicit
 
     (EitherT.fromEither[Future] {
       request.cookies.get(mvc.ActionAttrKey.auth.COOKIES_NAME).map(_.value) match {
-        case Some(v) => Right(v)
+        case Some(v) =>
+          val value = Json.parse(v).as[SendLogin]
+          Right(value)
         case None    => Left(Unauthorized("Not found login info"))
       }
     } flatMapF {

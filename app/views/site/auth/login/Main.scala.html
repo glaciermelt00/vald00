@@ -7,9 +7,11 @@
 
 @import play.api.data._
 @import play.api.i18n.MessagesProvider
+@import model.auth.SendLogin
 
 @(
-  vv:   model.site.auth.SiteViewValueLogin
+  vv:   model.site.auth.SiteViewValueLogin,
+  form: Form[SendLogin]
 )(implicit messagesProvider: MessagesProvider)
 @views.html.common.layout.Default(vv.layout) {
   @views.html.common.layout.ContentLayout(
@@ -18,5 +20,5 @@
   )
 }
 @tplContent = {
-  @views.html.site.auth.login._01_Login()
+  @views.html.site.auth.login._01_Login(form)
 }
