@@ -17,14 +17,15 @@ import lib.udb.model.User
  */
 import Answer._
 case class Answer(
-  id:          Option[Id]      = None,  // Id
-  uid:         User.Id,                 // Id of user
-  readAnswer:  Seq[ReadAnswer] = Nil,   // Answer of reading
-  speedSilent: Option[Int]     = None,  // Speed of silent reading
-  speedReply:  Option[Int]     = None,  // Speed of reply
-  speedOral:   Option[Int]     = None,  // Speed of silent reading
-  updatedAt:   LocalDateTime   = NOW,   // DateTime of updated
-  createdAt:   LocalDateTime   = NOW    // DateTime of created
+  id:            Option[Id]                      = None,  // Id
+  uid:           User.Id,                                 // Id of user
+  readAnswer:    Seq[(Question, Option[Choice])] = Nil,   // Answer of reading
+  readTextStart: Option[LocalDateTime]           = None,  // DateTime of start reading text
+  readTextEnd:   Option[LocalDateTime]           = None,  // DateTime of end reading text
+  readQuizStart: Option[LocalDateTime]           = None,  // DateTime of start reading quiz
+  readQuizEnd:   Option[LocalDateTime]           = None,  // DateTime of end reading quiz
+  updatedAt:     LocalDateTime                   = NOW,   // DateTime of updated
+  createdAt:     LocalDateTime                   = NOW    // DateTime of created
 ) extends EntityModel[Id]
 
 /**
@@ -36,15 +37,21 @@ object Answer {
   val  Id = the[Identity[Id]]
   type Id = Long @@ Answer
 
-  /**
-   * ReadAnswer
-   */
-  sealed abstract class ReadAnswer(val code: Long, val name: String) extends EnumBitFlags
-  object ReadAnswer extends EnumBitFlags.Of[ReadAnswer] {
-    case object IS_CORRECT_ON_FIRST  extends ReadAnswer(code = 1 << 0, name = "問一正解")
-    case object IS_CORRECT_ON_SECOND extends ReadAnswer(code = 1 << 1, name = "問二正解")
-    case object IS_CORRECT_ON_THIRD  extends ReadAnswer(code = 1 << 2, name = "問三正解")
-    case object IS_CORRECT_ON_FOURTH extends ReadAnswer(code = 1 << 3, name = "問四正解")
-    case object IS_CORRECT_ON_FIFTH  extends ReadAnswer(code = 1 << 4, name = "問五正解")
+  // --[ Enum: Question ]-------------------------------------------------------
+  sealed abstract class Question(val code: Short) extends EnumStatus
+  object Question extends EnumStatus.Of[Question] {
+    case object IS_FIRST  extends Question(code = 1)
+    case object IS_SECOND extends Question(code = 2)
+    case object IS_THIRD  extends Question(code = 3)
+    case object IS_FOURTH extends Question(code = 4)
+    case object IS_FIFTH  extends Question(code = 5)
+  }
+
+  // --[ Enum: Choice ]---------------------------------------------------------
+  sealed abstract class Choice(val code: Short) extends EnumStatus
+  object Choice extends EnumStatus.Of[Choice] {
+    case object IS_FIRST  extends Choice(code = 1)
+    case object IS_SECOND extends Choice(code = 2)
+    case object IS_THIRD  extends Choice(code = 3)
   }
 }
