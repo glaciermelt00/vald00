@@ -40,6 +40,11 @@ object ReadAnswer {
 
   // --[ Enum ]-----------------------------------------------------------------
   /**
+   * Answer
+   */
+  object Answer extends Answer(question = Question, choice = Choice)
+
+  /**
    * Question enum
    */
   sealed abstract class Question(val code: Short) extends EnumStatus

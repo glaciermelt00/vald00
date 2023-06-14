@@ -9,37 +9,34 @@ package lib.student.model
 
 import play.api.libs.json._
 import ixias.util.json.{ JsonEnvReads, JsonEnvWrites }
-
-import lib.student.model.ReadAnswer._
+import ixias.util.EnumStatus
 
 /**
   * Answer element
   */
-case class AnswerElement(
-  key:   Question,
-  value: Option[Choice]
+case class AnswerElement[Q <: EnumStatus, C <: EnumStatus](
+  key:   Q,
+  value: Option[C]
 )
 
 /**
  * Answer
  */
-object Answer extends JsonEnvReads with JsonEnvWrites {
+abstract class Answer[Q <: EnumStatus, C <: EnumStatus](
+  question: EnumStatus.Of[Q],
+  choice:   EnumStatus.Of[C]
+) extends JsonEnvReads with JsonEnvWrites {
 
   // --[ Type definitions ]-----------------------------------------------------
   /**
    * The type of element list
    */
-  type List    = Seq[AnswerElement]
-
-  /**
-   * The type of element
-   */
-  type Element = AnswerElement
+  type List    = Seq[AnswerElement[Q, C]]
 
   // --[ Json combinator ]------------------------------------------------------
-  implicit val readsT1 = enumReads(Question)
-  implicit val readsT2 = enumReads(Choice)
-  implicit val format  = Json.format[AnswerElement]
+  implicit val readsT1 = enumReads(question)
+  implicit val readsT2 = enumReads(choice)
+  implicit val format  = Json.format[AnswerElement[Q, C]]
 
   // --[ Function ]------------------------------------------------------------
   /**
