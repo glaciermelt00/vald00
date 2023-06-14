@@ -7,44 +7,47 @@
 
 package lib.student.model
 
-import ixias.model._
-import ixias.util.EnumBitFlags
-import java.time.LocalDateTime
-import lib.udb.model.User
+import play.api.libs.json._
+import ixias.util.json.{ JsonEnvReads, JsonEnvWrites }
+import ixias.util.EnumStatus
 
 /**
- * Answer data of problem
- */
-import Answer._
-case class Answer(
-  id:          Option[Id]      = None,  // Id
-  uid:         User.Id,                 // Id of user
-  readAnswer:  Seq[ReadAnswer] = Nil,   // Answer of reading
-  speedSilent: Option[Int]     = None,  // Speed of silent reading
-  speedReply:  Option[Int]     = None,  // Speed of reply
-  speedOral:   Option[Int]     = None,  // Speed of silent reading
-  updatedAt:   LocalDateTime   = NOW,   // DateTime of updated
-  createdAt:   LocalDateTime   = NOW    // DateTime of created
-) extends EntityModel[Id]
+  * Answer element
+  */
+case class AnswerElement[Q <: EnumStatus, C <: EnumStatus](
+  key:   Q,
+  value: Option[C]
+)
 
 /**
- * Companion object
+ * Answer
  */
-object Answer {
+abstract class Answer[Q <: EnumStatus, C <: EnumStatus](
+  question: EnumStatus.Of[Q],
+  choice:   EnumStatus.Of[C]
+) extends JsonEnvReads with JsonEnvWrites {
 
-  // --[ New Types ]------------------------------------------------------------
-  val  Id = the[Identity[Id]]
-  type Id = Long @@ Answer
+  // --[ Type definitions ]-----------------------------------------------------
+  /**
+   * The type of element list
+   */
+  type List    = Seq[AnswerElement[Q, C]]
+
+  // --[ Json combinator ]------------------------------------------------------
+  implicit val readsT1 = enumReads(question)
+  implicit val readsT2 = enumReads(choice)
+  implicit val format  = Json.format[AnswerElement[Q, C]]
+
+  // --[ Function ]------------------------------------------------------------
+  /**
+    * Convert an instance of the concrete type
+    */
+  def to(t: List): String =
+    Json.toJson(t.filter(_.value.isDefined)).toString
 
   /**
-   * ReadAnswer
-   */
-  sealed abstract class ReadAnswer(val code: Long, val name: String) extends EnumBitFlags
-  object ReadAnswer extends EnumBitFlags.Of[ReadAnswer] {
-    case object IS_CORRECT_ON_FIRST  extends ReadAnswer(code = 1 << 0, name = "問一正解")
-    case object IS_CORRECT_ON_SECOND extends ReadAnswer(code = 1 << 1, name = "問二正解")
-    case object IS_CORRECT_ON_THIRD  extends ReadAnswer(code = 1 << 2, name = "問三正解")
-    case object IS_CORRECT_ON_FOURTH extends ReadAnswer(code = 1 << 3, name = "問四正解")
-    case object IS_CORRECT_ON_FIFTH  extends ReadAnswer(code = 1 << 4, name = "問五正解")
-  }
+    * Convert an instance of the generic representation
+    */
+  def from(s: String): List =
+    Json.parse(s).as[List]
 }
