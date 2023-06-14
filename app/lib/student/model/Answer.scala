@@ -8,7 +8,7 @@
 package lib.student.model
 
 import ixias.model._
-import ixias.util.EnumBitFlags
+import ixias.util.EnumStatus
 import java.time.LocalDateTime
 import lib.udb.model.User
 
@@ -37,7 +37,10 @@ object Answer {
   val  Id = the[Identity[Id]]
   type Id = Long @@ Answer
 
-  // --[ Enum: Question ]-------------------------------------------------------
+  // --[ Enum ]-----------------------------------------------------------------
+  /**
+   * Question enum
+   */
   sealed abstract class Question(val code: Short) extends EnumStatus
   object Question extends EnumStatus.Of[Question] {
     case object IS_FIRST  extends Question(code = 1)
@@ -48,6 +51,9 @@ object Answer {
   }
 
   // --[ Enum: Choice ]---------------------------------------------------------
+  /**
+    * Choice enum
+    */
   sealed abstract class Choice(val code: Short) extends EnumStatus
   object Choice extends EnumStatus.Of[Choice] {
     case object IS_FIRST  extends Choice(code = 1)
