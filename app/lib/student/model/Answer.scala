@@ -7,57 +7,50 @@
 
 package lib.student.model
 
-import ixias.model._
-import ixias.util.EnumStatus
-import java.time.LocalDateTime
-import lib.udb.model.User
+import play.api.libs.json._
+import ixias.util.json.{ JsonEnvReads, JsonEnvWrites }
+
+import lib.student.model.ReadAnswer._
 
 /**
- * Answer data of problem
- */
-import Answer._
-case class Answer(
-  id:            Option[Id]                      = None,  // Id
-  uid:           User.Id,                                 // Id of user
-  readAnswer:    Seq[(Question, Option[Choice])] = Nil,   // Answer of reading
-  readTextStart: Option[LocalDateTime]           = None,  // DateTime of start reading text
-  readTextEnd:   Option[LocalDateTime]           = None,  // DateTime of end reading text
-  readQuizStart: Option[LocalDateTime]           = None,  // DateTime of start reading quiz
-  readQuizEnd:   Option[LocalDateTime]           = None,  // DateTime of end reading quiz
-  updatedAt:     LocalDateTime                   = NOW,   // DateTime of updated
-  createdAt:     LocalDateTime                   = NOW    // DateTime of created
-) extends EntityModel[Id]
+  * Answer element
+  */
+case class AnswerElement(
+  key:   Question,
+  value: Option[Choice]
+)
 
 /**
- * Companion object
+ * Answer
  */
-object Answer {
+object Answer extends JsonEnvReads with JsonEnvWrites {
 
-  // --[ New Types ]------------------------------------------------------------
-  val  Id = the[Identity[Id]]
-  type Id = Long @@ Answer
-
-  // --[ Enum ]-----------------------------------------------------------------
+  // --[ Type definitions ]-----------------------------------------------------
   /**
-   * Question enum
+   * The type of element list
    */
-  sealed abstract class Question(val code: Short) extends EnumStatus
-  object Question extends EnumStatus.Of[Question] {
-    case object IS_FIRST  extends Question(code = 1)
-    case object IS_SECOND extends Question(code = 2)
-    case object IS_THIRD  extends Question(code = 3)
-    case object IS_FOURTH extends Question(code = 4)
-    case object IS_FIFTH  extends Question(code = 5)
-  }
+  type List    = Seq[AnswerElement]
 
-  // --[ Enum: Choice ]---------------------------------------------------------
   /**
-    * Choice enum
+   * The type of element
+   */
+  type Element = AnswerElement
+
+  // --[ Json combinator ]------------------------------------------------------
+  implicit val readsT1 = enumReads(Question)
+  implicit val readsT2 = enumReads(Choice)
+  implicit val format  = Json.format[AnswerElement]
+
+  // --[ Function ]------------------------------------------------------------
+  /**
+    * Convert an instance of the concrete type
     */
-  sealed abstract class Choice(val code: Short) extends EnumStatus
-  object Choice extends EnumStatus.Of[Choice] {
-    case object IS_FIRST  extends Choice(code = 1)
-    case object IS_SECOND extends Choice(code = 2)
-    case object IS_THIRD  extends Choice(code = 3)
-  }
+  def to(t: List): String =
+    Json.toJson(t.filter(_.value.isDefined)).toString
+
+  /**
+    * Convert an instance of the generic representation
+    */
+  def from(s: String): List =
+    Json.parse(s).as[List]
 }

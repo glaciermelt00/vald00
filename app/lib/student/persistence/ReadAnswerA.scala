@@ -11,31 +11,31 @@ package lib.student.persistence
 import slick.jdbc.JdbcProfile
 import ixias.persistence.SlickRepository
 import scala.concurrent.Future
-import lib.student.model.Answer
+import lib.student.model.ReadAnswer
 
 /**
- * AnswerA Information
+ * ReadAnswerA Information
  */
-case class AnswerARepository[P <: JdbcProfile]()(implicit val driver: P)
-    extends SlickRepository[Answer.Id, Answer, P]
+case class ReadAnswerARepository[P <: JdbcProfile]()(implicit val driver: P)
+    extends SlickRepository[ReadAnswer.Id, ReadAnswer, P]
     with db.SlickResourceProvider[P] {
   import api._
 
   // --[ Methods ]--------------------------------------------------------------
   /**
-   * Get AnswerA data
+   * Get ReadAnswerA data
    */
   def get(id: Id): Future[Option[EntityEmbeddedId]] =
-    RunDBAction(AnswerATable, "slave") { _
+    RunDBAction(ReadAnswerATable, "slave") { _
       .filter(_.id === id)
       .result.headOption
     }
 
   /**
-   * Get AnswerA data
+   * Get ReadAnswerA data
    */
   def seek(cursor: Cursor): Future[Seq[EntityEmbeddedId]] =
-    RunDBAction(AnswerATable, "slave") { _
+    RunDBAction(ReadAnswerATable, "slave") { _
       .sortBy(_.id.desc)
       .seek(cursor)
       .result
@@ -43,18 +43,18 @@ case class AnswerARepository[P <: JdbcProfile]()(implicit val driver: P)
 
   // --[ Methods ]--------------------------------------------------------------
   /**
-   * Add AnswerA data
+   * Add ReadAnswerA data
    */
   def add(data: EntityWithNoId): Future[Id] =
-    RunDBAction(AnswerATable) { slick =>
+    RunDBAction(ReadAnswerATable) { slick =>
       slick returning slick.map(_.id) += data.v
     }
 
   /**
-   * Update AnswerA data
+   * Update ReadAnswerA data
    */
   def update(data: EntityEmbeddedId): Future[Option[EntityEmbeddedId]] =
-    RunDBAction(AnswerATable) { slick =>
+    RunDBAction(ReadAnswerATable) { slick =>
       val row = slick.filter(_.id === data.id)
       for {
         old <- row.result.headOption
@@ -66,10 +66,10 @@ case class AnswerARepository[P <: JdbcProfile]()(implicit val driver: P)
     }
 
   /**
-   * Eliminate specified AnswerA data
+   * Eliminate specified ReadAnswerA data
    */
   def remove(id: Id): Future[Option[EntityEmbeddedId]] =
-    RunDBAction(AnswerATable) { slick =>
+    RunDBAction(ReadAnswerATable) { slick =>
       val row = slick.filter(_.id === id)
       for {
         old <- row.result.headOption
