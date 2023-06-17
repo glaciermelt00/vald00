@@ -10,11 +10,13 @@ package model.form.student
 import play.api.data._
 import play.api.data.Forms._
 
+import lib.student.model.ReadAnswer._
+
 /**
  * Answer A Data
  */
 case class FormValueAnswerA(
-  answerFirst:  String,
+  answerFirst:  Choice,
   answerSecond: String,
   answerThird:  String,
   answerFourth: String,
@@ -25,9 +27,19 @@ case class FormValueAnswerA(
  * Companion object
  */
 object FormValueAnswerA {
+
+  /**
+   * Transform mapping to Choice
+   */
+  def choiceMapping(number: Mapping[Int]): Mapping[Choice] =
+    number.transform[Choice](
+      v => Choice(v.toShort),
+      c => c.code.toInt
+    )
+
   val form: Form[FormValueAnswerA] = Form(
     mapping(
-      "answerFirst"  -> nonEmptyText,
+      "answerFirst"  -> choiceMapping(number),
       "answerSecond" -> nonEmptyText,
       "answerThird"  -> nonEmptyText,
       "answerFourth" -> nonEmptyText,
