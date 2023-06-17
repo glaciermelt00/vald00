@@ -17,10 +17,10 @@ import lib.student.model.ReadAnswer._
  */
 case class FormValueAnswerA(
   answerFirst:  Choice,
-  answerSecond: String,
-  answerThird:  String,
-  answerFourth: String,
-  answerFifth:  String
+  answerSecond: Choice,
+  answerThird:  Choice,
+  answerFourth: Choice,
+  answerFifth:  Choice
 )
 
 /**
@@ -37,13 +37,16 @@ object FormValueAnswerA {
       c => c.code.toInt
     )
 
+  /**
+   * Form mapping
+   */
   val form: Form[FormValueAnswerA] = Form(
     mapping(
       "answerFirst"  -> choiceMapping(number),
-      "answerSecond" -> nonEmptyText,
-      "answerThird"  -> nonEmptyText,
-      "answerFourth" -> nonEmptyText,
-      "answerFifth"  -> nonEmptyText
+      "answerSecond" -> choiceMapping(number),
+      "answerThird"  -> choiceMapping(number),
+      "answerFourth" -> choiceMapping(number),
+      "answerFifth"  -> choiceMapping(number)
     )(FormValueAnswerA.apply)(FormValueAnswerA.unapply)
   )
 }
