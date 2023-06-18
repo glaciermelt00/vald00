@@ -7,6 +7,9 @@
 
 package controllers.form.student
 
+import cats.data.EitherT
+import cats.implicits._
+import scala.concurrent.Future
 import play.api.mvc._
 import play.api.i18n.I18nSupport
 
@@ -25,25 +28,21 @@ class AnswerController @javax.inject.Inject()(implicit
   /**
    * Submit answer
    */
-  def submitAnswer = Action { implicit request =>
-    FormValueAnswerA.form.bindFromRequest.fold(
-      formWithErrors => {
-        BadRequest(views.html.site.student.problem.a.Main(
-          model.site.student.SiteViewValueProblemA.build,
-          formWithErrors
-        ))
-      },
-      answer => {
-        val Some(loginCookie) = request.cookies.get("Login-info")
+  def submitAnswer = Action.async { implicit request =>
+    EitherT.fromEither[Future] {
+      FormHelper.bindFromRequest(FormValueAnswerA.form.mapping)
+    } semiflatMap {
+      case post => {
+        val Some(loginCookie) = request.cookies.get(mvc.ActionAttrKey.auth.COOKIES_NAME)
         val token             = Auth.Token(loginCookie.value)
         for {
           Some(auth) <- AuthRepository.findByToken(token)
-          _          <- ReadAnswerARepository.add(answer.create(auth.v.uid))
+          _          <- ReadAnswerARepository.add(post.create(auth.v.uid))
           // TODO: 後で、problem_b に遷移できるようにする
         } yield Ok(views.html.site.top.Main(
           model.site.SiteViewValueTop.build
         ))
       }
-    )
+    }
   }
 }
