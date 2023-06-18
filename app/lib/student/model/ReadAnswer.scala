@@ -57,12 +57,13 @@ object ReadAnswer {
   }
 
   /**
-    * Choice enum
-    */
+   * Choice enum
+   */
   sealed abstract class Choice(val code: Short) extends EnumStatus
   object Choice extends EnumStatus.Of[Choice] {
     case object IS_FIRST  extends Choice(code = 1)
     case object IS_SECOND extends Choice(code = 2)
     case object IS_THIRD  extends Choice(code = 3)
   }
+
 }

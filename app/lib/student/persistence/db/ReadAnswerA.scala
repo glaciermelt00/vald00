@@ -37,15 +37,15 @@ case class ReadAnswerATable[P <: JdbcProfile]()(implicit val driver: P)
     import ReadAnswer._
 
     // Columns
-    /* @1  */ def id        = column[Id]            ("id",         O.UInt64, O.PrimaryKey, O.AutoInc)
-    /* @2  */ def uid       = column[User.Id]       ("uid",        O.Int64)
-    /* @3  */ def answer    = column[String]        ("answer",     O.Text)
-    /* @4  */ def textStart = column[LocalDateTime] ("text_start", O.DateTime)
-    /* @5  */ def textEnd   = column[LocalDateTime] ("text_end",   O.DateTime)
-    /* @6  */ def quizStart = column[LocalDateTime] ("quiz_start", O.DateTime)
-    /* @7  */ def quizEnd   = column[LocalDateTime] ("quiz_end",   O.DateTime)
-    /* @8  */ def updatedAt = column[LocalDateTime] ("updated_at", O.TsCurrent)
-    /* @9  */ def createdAt = column[LocalDateTime] ("created_at", O.Ts)
+    /* @1  */ def id        = column[Id]                    ("id",         O.UInt64, O.PrimaryKey, O.AutoInc)
+    /* @2  */ def uid       = column[User.Id]               ("uid",        O.Int64)
+    /* @3  */ def answer    = column[String]                ("answer",     O.Text)
+    /* @4  */ def textStart = column[Option[LocalDateTime]] ("text_start", O.DateTime)
+    /* @5  */ def textEnd   = column[Option[LocalDateTime]] ("text_end",   O.DateTime)
+    /* @6  */ def quizStart = column[Option[LocalDateTime]] ("quiz_start", O.DateTime)
+    /* @7  */ def quizEnd   = column[Option[LocalDateTime]] ("quiz_end",   O.DateTime)
+    /* @8  */ def updatedAt = column[LocalDateTime]         ("updated_at", O.TsCurrent)
+    /* @9  */ def createdAt = column[LocalDateTime]         ("created_at", O.Ts)
 
     /**
      * The bidirectional mappings.
@@ -53,7 +53,7 @@ case class ReadAnswerATable[P <: JdbcProfile]()(implicit val driver: P)
      * 2) Model        => Tuple(table)
      */
     def * = (
-      id.?, uid, answer, textStart.?, textEnd.?, quizStart.?, quizEnd.?, updatedAt, createdAt
+      id.?, uid, answer, textStart, textEnd, quizStart, quizEnd, updatedAt, createdAt
     ) <> (
       (ReadAnswer.apply   _).tupled.compose(
         t => t.copy(
