@@ -10,6 +10,8 @@ package model.form.student
 import play.api.data._
 import play.api.data.Forms._
 
+import lib.udb.model.User
+import lib.student.model._
 import lib.student.model.ReadAnswer._
 
 /**
@@ -21,7 +23,24 @@ case class FormValueAnswerA(
   answerThird:  Choice,
   answerFourth: Choice,
   answerFifth:  Choice
-)
+) {
+
+  /**
+   * Create a new object
+   */
+  def create(uid: User.Id): ReadAnswer#WithNoId =
+    ReadAnswer(
+      id        = None,
+      uid       = uid,
+      answer    = Seq(
+        AnswerElement(Question.IS_FIRST,  Some(answerFirst)),
+        AnswerElement(Question.IS_SECOND, Some(answerSecond)),
+        AnswerElement(Question.IS_THIRD,  Some(answerThird)),
+        AnswerElement(Question.IS_FOURTH, Some(answerFourth)),
+        AnswerElement(Question.IS_FIFTH,  Some(answerFifth))
+      )
+    ).toWithNoId
+}
 
 /**
  * Companion object

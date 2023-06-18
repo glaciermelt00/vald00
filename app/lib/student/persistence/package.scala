@@ -17,6 +17,9 @@ package object persistence {
     implicit val driver = slick.jdbc.MySQLProfile
 
     //- For Group
-    val GroupRepository = persistence.GroupRepository()
+    val GroupRepository       = persistence.GroupRepository()
+
+    //- For Answer
+    val ReadAnswerARepository = persistence.ReadAnswerARepository()
   }
 }
