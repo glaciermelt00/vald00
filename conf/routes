@@ -11,10 +11,10 @@ POST /login         controllers.site.auth.LoginController.commit
 
 # Student
 GET  /mypage        controllers.site.student.MyPageController.view
-GET  /problem/a     controllers.site.student.ProblemController.viewProblemA
+GET  /problem/a     controllers.site.student.ProblemAController.view
 
 # Form
-POST /answer        controllers.form.student.AnswerController.submitAnswer
+POST /answer        controllers.form.student.AnswerAController.submit
 
 # System
 GET  /ping          controllers.ApplicationController.ping

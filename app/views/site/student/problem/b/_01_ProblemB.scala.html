@@ -6,20 +6,20 @@
  *@
 
 @**
- * Problem A page
+ * Problem B page
  *@
 
 @import play.api.data._
 @import play.api.i18n.MessagesProvider
 @import views.html.helper
-@import model.form.student.FormValueAnswerA
+@import model.form.student.FormValueAnswerB
 
-@(form: Form[FormValueAnswerA])(implicit messagesProvider: MessagesProvider)
+@(form: Form[FormValueAnswerB])(implicit messagesProvider: MessagesProvider)
 @views.html.common.layout.Section(
-  sectionId = "site-problem-a"
+  sectionId = "site-problem-b"
 ) {
   <div class="inner__head">
-    <h2>読解テスト - A 問題</h2>
+    <h2>読解テスト - B 問題</h2>
   </div>
   <div class="inner__content">
     <div class="content__wrapper">

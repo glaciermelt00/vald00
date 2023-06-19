@@ -19,16 +19,16 @@ import lib.student.persistence.default.ReadAnswerARepository
 import model.form.student.FormValueAnswerA
 
 /**
- * Answer form
+ * Answer A form
  */
-class AnswerController @javax.inject.Inject()(implicit
+class AnswerAController @javax.inject.Inject()(implicit
   cc: MessagesControllerComponents
 ) extends AbstractController(cc) with mvc.ExtensionMethods with I18nSupport {
 
   /**
-   * Submit answer
+   * Submit
    */
-  def submitAnswer = Action.async { implicit request =>
+  def submit = Action.async { implicit request =>
     EitherT.fromEither[Future] {
       FormHelper.bindFromRequest(FormValueAnswerA.form.mapping)
     } semiflatMap {

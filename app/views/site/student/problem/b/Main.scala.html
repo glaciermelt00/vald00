@@ -1,0 +1,24 @@
+@*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ *@
+
+@import play.api.data._
+@import play.api.i18n.MessagesProvider
+@import model.form.student.FormValueAnswerB
+
+@(
+  vv:   model.site.student.SiteViewValueProblemB,
+  form: Form[FormValueAnswerB]
+)(implicit messagesProvider: MessagesProvider)
+@views.html.common.layout.Default(vv.layout) {
+  @views.html.common.layout.ContentLayout(
+    id      = "content",
+    content = tplContent
+  )
+}
+@tplContent = {
+  @views.html.site.student.problem.b._01_ProblemB(form)
+}

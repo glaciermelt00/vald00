@@ -40,6 +40,7 @@ function getEntries() {
     'common':    [ './scss/10-common/index.scss'      ],
     'login':     [ './scss/11-login/index.scss'       ],
     'problem-a': [ './scss/13-problem-a/index.scss'   ],
+    'problem-b': [ './scss/14-problem-b/index.scss'   ],
   };
 }
 
