@@ -10,7 +10,7 @@ GET  /login         controllers.site.auth.LoginController.view
 POST /login         controllers.site.auth.LoginController.commit
 
 # Student
-GET  /mypage        controllers.site.student.MyPageController.view
+GET  /home          controllers.site.student.HomeController.view
 GET  /problem/a     controllers.site.student.ProblemAController.view
 
 # Form
