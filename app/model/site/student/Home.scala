@@ -11,23 +11,23 @@ import play.api.mvc.RequestHeader
 import model.component.ViewValuePageLayout
 
 /**
- * My Page Site
+ * Home Site
  */
-case class SiteViewValueMyPage(
+case class SiteViewValueHome(
   layout: ViewValuePageLayout
 )
 
 /**
  * Companion Object
  */
-object SiteViewValueMyPage {
+object SiteViewValueHome {
 
   /**
    * Create a view model object.
    */
-  def build()(implicit request: RequestHeader): SiteViewValueMyPage =
-    SiteViewValueMyPage(
+  def build()(implicit request: RequestHeader): SiteViewValueHome =
+    SiteViewValueHome(
       layout = ViewValuePageLayout.build
-                 .addRemoteAsset(_ => "my-page")
+                .addRemoteAsset(_ => "home")
     )
 }

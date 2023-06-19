@@ -6,20 +6,20 @@
  *@
 
 @**
- * Problem A page
+ * Problem B page
  *@
 
 @import play.api.data._
 @import play.api.i18n.MessagesProvider
 @import views.html.helper
-@import model.form.student.FormValueAnswerA
+@import model.form.student.FormValueAnswerB
 
-@(form: Form[FormValueAnswerA])(implicit messagesProvider: MessagesProvider)
+@(form: Form[FormValueAnswerB])(implicit messagesProvider: MessagesProvider)
 @views.html.common.layout.Section(
-  sectionId = "site-problem-a"
+  sectionId = "site-problem-b"
 ) {
   <div class="inner__head">
-    <h2>読解テスト - A 問題</h2>
+    <h2>読解テスト - B 問題</h2>
   </div>
   <div class="inner__content">
     <div class="content__wrapper">
@@ -31,7 +31,7 @@
 
       @* Statement *@
       <div class="statement">
-        <span>私の家族を紹介します。私は、中学二年生です。父は会社に勤務しています。祖父母と母の仕事はいちご栽培です。双子の兄は大学生で、東京に住んでいます。高校生の姉は地元の学校です。妹は私の二歳下です。弟は幼稚園生です。夕食は帰宅時間の遅い父を除いてみんなで食べます。</span>
+        <span>今回の学力テストの結果は前回よりも五十点上がりました。二週間、毎日、朝一時間、夕食後に二時間テスト勉強した結果だと思います。国語は八十点、数学は八十点、英語は六十五点、社会は九十点、理科が八十五点です。国語は前回より十五点上がり、数学は十点上がり、社会は十点上がり、理科は二十点上がりましたが、英語は下がってしまいました。</span>
       </div>
 
       @* Reading complete *@
@@ -44,47 +44,47 @@
       @* TODO: make template *@
       <div id="after__reading" class="after__reading display-none">
 
-        @helper.form(action = controllers.form.student.routes.AnswerAController.submit) {
+        @helper.form(action = controllers.form.student.routes.AnswerBController.submit) {
           <div class="form__inner">
-            @* Question 1 *@
+            @* Question 5 *@
             @* TODO: make template *@
             <div class="question__item">
               @helper.inputRadioGroup(
                 form("answerFirst"),
-                Seq("1" -> "四人", "2" -> "五人", "3" -> "六人"),
-                Symbol("_label") -> "問一　子どもは全部で何人ですか。"
+                Seq("1" -> "七十五点", "2" -> "八十点", "3" -> "八十五点"),
+                Symbol("_label") -> "問六　今回の学力テストは、平均何点だったでしょう。"
               )
             </div>
 
             <div class="question__item">
               @helper.inputRadioGroup(
                 form("answerSecond"),
-                Seq("1" -> "中学一年", "2" -> "六年生", "3" -> "五年生"),
-                Symbol("_label") -> "問二　妹は、何年生ですか。"
+                Seq("1" -> "二百五十点", "2" -> "三百点", "3" -> "三百五十点"),
+                Symbol("_label") -> "問七　前回のテストは、何点でしたか。"
               )
             </div>
 
             <div class="question__item">
               @helper.inputRadioGroup(
                 form("answerThird"),
-                Seq("1" -> "四人", "2" -> "五人", "3" -> "六人"),
-                Symbol("_label") -> "問三　学校に行っているのは、家族に何人いますか。"
+                Seq("1" -> "国語", "2" -> "社会", "3" -> "理科"),
+                Symbol("_label") -> "問八　一番点数が伸びた教科は、何ですか。"
               )
             </div>
 
             <div class="question__item">
               @helper.inputRadioGroup(
                 form("answerFourth"),
-                Seq("1" -> "三人", "2" -> "四人", "3" -> "五人"),
-                Symbol("_label") -> "問四　私の家族で、仕事をしているのは何人ですか。"
+                Seq("1" -> "六十点", "2" -> "六十五点", "3" -> "七十点"),
+                Symbol("_label") -> "問九　前回の英語のテストは、何点ですか。"
               )
             </div>
 
             <div class="question__item">
               @helper.inputRadioGroup(
                 form("answerFifth"),
-                Seq("1" -> "七人", "2" -> "八人", "3" -> "九人"),
-                Symbol("_label") -> "問五　夕食を一緒に食べるのは何ですか。"
+                Seq("1" -> "三十時間", "2" -> "三十五時間", "3" -> "四十二時間"),
+                Symbol("_label") -> "問十　今回のテストのために、合計何時間勉強しましたか。"
               )
             </div>
 

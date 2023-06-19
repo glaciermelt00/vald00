@@ -11,9 +11,9 @@ import play.api.mvc._
 import play.api.i18n.I18nSupport
 
 /**
- * My page
+ * Home
  */
-class MyPageController @javax.inject.Inject()(implicit
+class HomeController @javax.inject.Inject()(implicit
   cc: MessagesControllerComponents
 ) extends AbstractController(cc) with mvc.ExtensionMethods with I18nSupport {
 
@@ -23,8 +23,8 @@ class MyPageController @javax.inject.Inject()(implicit
   def view = (
     Action andThen action.auth.Authenticated
   ) { implicit request =>
-    Ok(views.html.site.student.mypage.Main(
-      model.site.student.SiteViewValueMyPage.build
+    Ok(views.html.site.student.home.Main(
+      model.site.student.SiteViewValueHome.build
     ))
   }
 }

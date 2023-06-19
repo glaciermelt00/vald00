@@ -21,5 +21,6 @@ package object persistence {
 
     //- For Answer
     val ReadAnswerARepository = persistence.ReadAnswerARepository()
+    val ReadAnswerBRepository = persistence.ReadAnswerBRepository()
   }
 }

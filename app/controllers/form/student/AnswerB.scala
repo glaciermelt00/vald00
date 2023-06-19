@@ -15,30 +15,29 @@ import play.api.i18n.I18nSupport
 
 import lib.udb.model.Auth
 import lib.udb.persistence.default.AuthRepository
-import lib.student.persistence.default.ReadAnswerARepository
-import model.form.student.FormValueAnswerA
+import lib.student.persistence.default.ReadAnswerBRepository
+import model.form.student.FormValueAnswerB
 
 /**
- * Answer form
+ * Answer B form
  */
-class AnswerController @javax.inject.Inject()(implicit
+class AnswerBController @javax.inject.Inject()(implicit
   cc: MessagesControllerComponents
 ) extends AbstractController(cc) with mvc.ExtensionMethods with I18nSupport {
 
   /**
-   * Submit answer
+   * Submit
    */
-  def submitAnswer = Action.async { implicit request =>
+  def submit = Action.async { implicit request =>
     EitherT.fromEither[Future] {
-      FormHelper.bindFromRequest(FormValueAnswerA.form.mapping)
+      FormHelper.bindFromRequest(FormValueAnswerB.form.mapping)
     } semiflatMap {
       case post => {
         val Some(loginCookie) = request.cookies.get(mvc.ActionAttrKey.auth.COOKIES_NAME)
         val token             = Auth.Token(loginCookie.value)
         for {
           Some(auth) <- AuthRepository.findByToken(token)
-          _          <- ReadAnswerARepository.add(post.create(auth.v.uid))
-          // TODO: 後で、problem_b に遷移できるようにする
+          _          <- ReadAnswerBRepository.add(post.create(auth.v.uid))
         } yield Ok(views.html.site.top.Main(
           model.site.SiteViewValueTop.build
         ))

@@ -61,7 +61,7 @@ class LoginController @javax.inject.Inject()(implicit
           val token = Auth.buildToken(data.password)
           for {
             Some(auth) <- AuthRepository.findByToken(token)
-            result      = Redirect(controllers.site.student.routes.MyPageController.view)
+            result      = Redirect(controllers.site.student.routes.HomeController.view)
           } yield result.withCookies(Cookie(mvc.ActionAttrKey.auth.COOKIES_NAME, auth.v.token))
         }
       } getOrElse(

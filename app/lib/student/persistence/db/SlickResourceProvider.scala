@@ -20,10 +20,12 @@ trait SlickResourceProvider[P <: JdbcProfile] extends SlickColumnTypes[P] {
   // --[ Table ] ---------------------------------------------------------------
   object GroupTable       extends GroupTable
   object ReadAnswerATable extends ReadAnswerATable
+  object ReadAnswerBTable extends ReadAnswerBTable
 
   // --[ All Tables ] ----------------------------------------------------------
   lazy val AllTables = Seq(
     GroupTable,
     ReadAnswerATable,
+    ReadAnswerBTable,
   )
 }

@@ -1,0 +1,64 @@
+/*
+ * Copyright Jo Harada. All Rights Reserved.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+@use 'sass:map';
+@use 'theming' as main;
+
+#site-problem-b {
+
+  .inner__head {
+    display:         flex;
+    justify-content: center;
+    font-size:       main.$font-size-4xlarge;
+  }
+  .inner__content {
+    height:          500px;
+    display:         flex;
+    justify-content: flex-end;
+
+    .content__wrapper {
+      display:        flex;
+      gap:            main.$space-size-large;
+      flex-direction: column;
+      @include main.writing-mode(vertical-rl);
+    }
+    .reading__complete {
+      width:           main.$space-size-xlarge;
+      font-size:       main.$font-size-base;
+      line-height:     main.$font-size-base;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      &.display-none {
+        display: none;
+      }
+    }
+    .after__reading {
+      display:        flex;
+      gap:            main.$space-size-large;
+      flex-direction: column;
+      &.display-none {
+        display: none;
+      }
+    }
+    .form__inner {
+      display:        flex;
+      gap:            main.$space-size-large;
+      flex-direction: column;
+    }
+    .buttonset, .info {
+      margin:  main.$space-size-large main.$space-size-base 0 0;
+      display: flex;
+      gap:     main.$space-size-base;
+    }
+    .answer__complete {
+      width:       main.$space-size-xlarge;
+      font-size:   main.$font-size-base;
+      line-height: main.$font-size-base;
+    }
+  }
+}

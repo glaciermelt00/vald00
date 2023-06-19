@@ -11,23 +11,23 @@ import play.api.mvc.RequestHeader
 import model.component.ViewValuePageLayout
 
 /**
- * Problem A Site
+ * Problem B Site
  */
-case class SiteViewValueProblemA(
+case class SiteViewValueProblemB(
   layout: ViewValuePageLayout
 )
 
 /**
  * Companion Object
  */
-object SiteViewValueProblemA {
+object SiteViewValueProblemB {
 
   /**
    * Create a view model object.
    */
-  def build()(implicit request: RequestHeader): SiteViewValueProblemA =
-    SiteViewValueProblemA(
+  def build()(implicit request: RequestHeader): SiteViewValueProblemB =
+    SiteViewValueProblemB(
       layout = ViewValuePageLayout.build
-                .addRemoteAsset(_ => "problem-a")
+                .addRemoteAsset(_ => "problem-b")
     )
 }
