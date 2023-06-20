@@ -38,9 +38,7 @@ class AnswerBController @javax.inject.Inject()(implicit
         for {
           Some(auth) <- AuthRepository.findByToken(token)
           _          <- ReadAnswerBRepository.add(post.create(auth.v.uid))
-        } yield Ok(views.html.site.top.Main(
-          model.site.SiteViewValueTop.build
-        ))
+        } yield Redirect(controllers.site.routes.TopController.view)
       }
     }
   }

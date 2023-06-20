@@ -38,10 +38,7 @@ class AnswerAController @javax.inject.Inject()(implicit
         for {
           Some(auth) <- AuthRepository.findByToken(token)
           _          <- ReadAnswerARepository.add(post.create(auth.v.uid))
-          // TODO: 後で、problem_b に遷移できるようにする
-        } yield Ok(views.html.site.top.Main(
-          model.site.SiteViewValueTop.build
-        ))
+        } yield Redirect(controllers.site.student.routes.ProblemBController.view)
       }
     }
   }
